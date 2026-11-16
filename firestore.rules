@@ -1,0 +1,86 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    match /content/{document=**} {
+      // Published study material is public. Writes remain server/admin only.
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /users/{userId} {
+      allow read: if owns(userId);
+      allow create, update: if owns(userId)
+        && request.resource.data.uid == userId
+        && request.resource.data.keys().hasOnly([
+          'uid', 'displayName', 'email', 'photoURL', 'lastLoginAt', 'createdAt'
+        ]);
+      allow delete: if false;
+
+      match /settings/{settingId} {
+        allow read: if owns(userId);
+        allow create, update: if owns(userId)
+          && request.resource.data.keys().hasOnly([
+            'language', 'theme', 'fontSize', 'studentName', 'updatedAt'
+          ])
+          && request.resource.data.language in ['uz', 'ja', 'en', 'ne', 'my']
+          && request.resource.data.theme in ['light', 'dark']
+          && request.resource.data.fontSize is int
+          && request.resource.data.fontSize >= 12
+          && request.resource.data.fontSize <= 24
+          && request.resource.data.studentName is string
+          && request.resource.data.studentName.size() <= 60;
+        allow delete: if owns(userId);
+      }
+
+      match /progress/{fieldId} {
+        allow read: if owns(userId);
+        allow create, update: if owns(userId)
+          && request.resource.data.keys().hasOnly([
+            'field', 'attempted', 'correct', 'wrong', 'lastAnsweredAt'
+          ])
+          && request.resource.data.field == fieldId
+          && request.resource.data.attempted is int
+          && request.resource.data.correct is int
+          && request.resource.data.wrong is int
+          && request.resource.data.attempted >= 0
+          && request.resource.data.correct >= 0
+          && request.resource.data.wrong >= 0
+          && request.resource.data.attempted == request.resource.data.correct + request.resource.data.wrong;
+        allow delete: if owns(userId);
+      }
+
+      match /answers/{answerId} {
+        allow read: if owns(userId);
+        allow create: if owns(userId)
+          && request.resource.data.keys().hasOnly([
+            'field', 'language', 'questionId', 'selectedAnswer',
+            'correctAnswer', 'correct', 'answeredAt'
+          ])
+          && request.resource.data.field is string
+          && request.resource.data.field.size() <= 40
+          && request.resource.data.language in ['uz', 'ja', 'en', 'ne', 'my']
+          && request.resource.data.questionId is string
+          && request.resource.data.questionId.size() <= 160
+          && request.resource.data.selectedAnswer is string
+          && request.resource.data.selectedAnswer.size() <= 500
+          && request.resource.data.correctAnswer is string
+          && request.resource.data.correctAnswer.size() <= 500
+          && request.resource.data.correct is bool;
+        allow update, delete: if false;
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

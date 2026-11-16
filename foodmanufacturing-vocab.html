@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>食品製造分野の語彙</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vocabulary.css?v=20261116-1" />
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-sector="foodmanufacturing">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="back" class="back" href="./index.html">戻る</a>
+      <div class="controls">
+        <a id="notebookLink" class="back notebook-link" href="./mistakes.html">間違いノート</a>
+        <select id="language" aria-label="言語">
+          <option value="ja">日本語</option>
+          <option value="uz">O'zbek</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="theme" class="theme control" type="button" aria-label="夜間表示"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <span id="eyebrow" class="eyebrow">特定技能 · 食品製造</span>
+      <h1 id="title">食品製造分野の語彙</h1>
+      <p id="lead" class="lead">食品工場で使う大切な日本語を復習しましょう。</p>
+    </section>
+    <section class="filters" aria-label="語彙の絞り込み">
+      <label class="filter" for="search">
+        <span id="searchLabel">検索</span>
+        <input id="search" type="search" autocomplete="off" />
+      </label>
+      <label class="filter" for="category">
+        <span id="categoryLabel">項目</span>
+        <select id="category"></select>
+      </label>
+    </section>
+    <div class="tools">
+      <div class="tools-left">
+        <h2 id="listTitle">基本用語</h2>
+        <span id="count" class="count" aria-live="polite"></span>
+      </div>
+      <div class="view-switch" role="tablist" aria-label="表示モード">
+        <button id="viewListBtn" class="view-btn is-active" type="button" aria-selected="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span id="viewListLabel">一覧</span>
+        </button>
+        <button id="viewFlashcardBtn" class="view-btn" type="button" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="viewFlashcardLabel">単語カード (Flashcard)</span>
+        </button>
+      </div>
+    </div>
+    <section id="flashcardArea" class="flashcard-area is-hidden" aria-label="単語カード">
+      <div class="fc-header">
+        <span id="fcCategory" class="fc-category-badge"></span>
+        <span id="fcCount" class="fc-counter">1 / 1000</span>
+      </div>
+      <div id="fcCard" class="fc-card" tabindex="0" role="button" aria-label="タップして意味を表示">
+        <div class="fc-card-inner">
+          <div class="fc-face fc-front">
+            <span class="fc-badge-hint" id="fcHintLabel">👆 タップで意味を表示</span>
+            <p id="fcTerm" class="fc-term"></p>
+            <p id="fcFrontReading" class="fc-reading-sub"></p>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="fc-back-category" id="fcBackCategory"></span>
+            <p id="fcMeaning" class="fc-meaning"></p>
+            <p id="fcReading" class="fc-reading"></p>
+            <p id="fcNote" class="fc-note"></p>
+          </div>
+        </div>
+      </div>
+      <div class="fc-controls">
+        <button id="fcPrev" class="fc-btn fc-nav" type="button">⬅️ 前へ</button>
+        <button id="fcFlip" class="fc-btn fc-flip" type="button">🔄 めくる</button>
+        <button id="fcNext" class="fc-btn fc-nav" type="button">次へ ➡️</button>
+      </div>
+      <div class="fc-actions">
+        <button id="fcMistake" class="fc-action-btn fc-mistake" type="button">❌ 覚えていない</button>
+        <button id="fcKnown" class="fc-action-btn fc-known" type="button">✅ 覚えた！</button>
+      </div>
+    </section>
+    <section id="vocabulary" class="vocabulary" aria-labelledby="listTitle">
+      <article class="word"><p class="word__term"><ruby>食品製造<rt>しょくひんせいぞう</rt></ruby></p><p class="word__meaning" data-uz="Oziq-ovqat ishlab chiqarish" data-ja="食品を加工して製品を作ること" data-en="Food manufacturing" data-ne="खाद्य उत्पादन">Oziq-ovqat ishlab chiqarish</p><p class="word__note" data-uz="Xom ashyodan xavfsiz oziq-ovqat mahsulotlarini tayyorlash sohasi." data-ja="原材料から安全な食品を作る分野です。" data-en="The field of making safe food products from raw materials." data-ne="कच्चा पदार्थबाट सुरक्षित खाद्य उत्पादन बनाउने क्षेत्र।">Xom ashyodan xavfsiz oziq-ovqat mahsulotlarini tayyorlash sohasi.</p></article>
+      <article class="word"><p class="word__term"><ruby>衛生<rt>えいせい</rt></ruby></p><p class="word__meaning" data-uz="Gigiyena" data-ja="清潔で健康を守ること" data-en="Hygiene" data-ne="सरसफाइ तथा स्वच्छता">Gigiyena</p><p class="word__note" data-uz="Ishchi, jihoz va ish joyining tozaligi mahsulot xavfsizligi uchun zarur." data-ja="作業者、道具、作業場所の清潔さは食品安全のために必要です。" data-en="Clean workers, equipment, and work areas are necessary for food safety." data-ne="कामदार, उपकरण र कार्यस्थलको सफाइ खाद्य सुरक्षाका लागि आवश्यक छ।">Ishchi, jihoz va ish joyining tozaligi mahsulot xavfsizligi uchun zarur.</p></article>
+      <article class="word"><p class="word__term"><ruby>原材料<rt>げんざいりょう</rt></ruby></p><p class="word__meaning" data-uz="Xom ashyo" data-ja="食品を作るもとになる材料" data-en="Raw materials" data-ne="कच्चा पदार्थ">Xom ashyo</p><p class="word__note" data-uz="Mahsulot tayyorlashda ishlatiladigan boshlang'ich masalliqlar." data-ja="製品作りに使う最初の材料です。" data-en="The starting ingredients used to make a product." data-ne="उत्पादन बनाउन प्रयोग हुने प्रारम्भिक सामग्री।">Mahsulot tayyorlashda ishlatiladigan boshlang'ich masalliqlar.</p></article>
+      <article class="word"><p class="word__term"><ruby>計量<rt>けいりょう</rt></ruby></p><p class="word__meaning" data-uz="O'lchash, tortish" data-ja="材料の重さや量を正確に測ること" data-en="Weighing / measuring" data-ne="तौल तथा मापन">O'lchash, tortish</p><p class="word__note" data-uz="Retseptga mos miqdorni aniq o'lchash kerak." data-ja="レシピどおりの量を正確に測ります。" data-en="Measure the correct amount according to the recipe." data-ne="रेसिपीअनुसार सही मात्रा ठीकसँग नाप्नुहोस्।">Retseptga mos miqdorni aniq o'lchash kerak.</p></article>
+      <article class="word"><p class="word__term"><ruby>加熱<rt>かねつ</rt></ruby></p><p class="word__meaning" data-uz="Qizdirish" data-ja="食品を温めたり火を通したりすること" data-en="Heating / cooking" data-ne="तताउने">Qizdirish</p><p class="word__note" data-uz="Mahsulotni belgilangan haroratda qizdirish bakteriyalar xavfini kamaytiradi." data-ja="決められた温度で加熱すると、細菌のリスクを減らせます。" data-en="Heating to the specified temperature helps reduce bacterial risk." data-ne="निर्धारित तापक्रममा तताउँदा ब्याक्टेरियाको जोखिम कम हुन्छ।">Mahsulotni belgilangan haroratda qizdirish bakteriyalar xavfini kamaytiradi.</p></article>
+      <article class="word"><p class="word__term"><ruby>冷却<rt>れいきゃく</rt></ruby></p><p class="word__meaning" data-uz="Sovutish" data-ja="食品を低い温度まで冷ますこと" data-en="Cooling" data-ne="चिस्याउने">Sovutish</p><p class="word__note" data-uz="Qizdirilgan mahsulotni kerakli haroratgacha tez sovuting." data-ja="加熱した食品は必要な温度まで速やかに冷却します。" data-en="Cool heated food quickly to the required temperature." data-ne="तताइएको खाना आवश्यक तापक्रमसम्म छिटो चिस्याउनुहोस्।">Qizdirilgan mahsulotni kerakli haroratgacha tez sovuting.</p></article>
+      <article class="word"><p class="word__term"><ruby>包装<rt>ほうそう</rt></ruby></p><p class="word__meaning" data-uz="Qadoqlash" data-ja="食品を容器や袋に入れて包むこと" data-en="Packaging" data-ne="प्याकेजिङ">Qadoqlash</p><p class="word__note" data-uz="Mahsulotni toza idish yoki paketga solib himoya qilish." data-ja="食品を清潔な容器や袋に入れて守ります。" data-en="Protect the product in a clean container or package." data-ne="उत्पादनलाई सफा कन्टेनर वा प्याकेजमा राखेर सुरक्षित गरिन्छ।">Mahsulotni toza idish yoki paketga solib himoya qilish.</p></article>
+      <article class="word"><p class="word__term"><ruby>異物<rt>いぶつ</rt></ruby></p><p class="word__meaning" data-uz="Begona narsa, aralashma" data-ja="食品に入ってはいけない物" data-en="Foreign material / contaminant" data-ne="नपर्नु पर्ने बाह्य वस्तु">Begona narsa, aralashma</p><p class="word__note" data-uz="Mahsulotga soch, plastmassa yoki boshqa begona narsa tushmasligi kerak." data-ja="髪の毛やプラスチックなどが食品に入らないようにします。" data-en="Prevent hair, plastic, and other foreign material from entering food." data-ne="कपाल, प्लास्टिक वा अन्य बाह्य वस्तु खानामा पर्न नदिनुहोस्।">Mahsulotga soch, plastmassa yoki boshqa begona narsa tushmasligi kerak.</p></article>
+      <article class="word"><p class="word__term"><ruby>消毒<rt>しょうどく</rt></ruby></p><p class="word__meaning" data-uz="Dezinfeksiya" data-ja="細菌やウイルスを減らすために清潔にすること" data-en="Disinfection / sanitization" data-ne="कीटाणु नाश">Dezinfeksiya</p><p class="word__note" data-uz="Ishlatishdan oldin asbob va yuzalarni dezinfeksiya qiling." data-ja="使用前に道具や作業台を消毒します。" data-en="Disinfect equipment and work surfaces before use." data-ne="प्रयोगअघि उपकरण र कार्य सतहलाई कीटाणुमुक्त गर्नुहोस्।">Ishlatishdan oldin asbob va yuzalarni dezinfeksiya qiling.</p></article>
+      <article class="word"><p class="word__term"><ruby>品質管理<rt>ひんしつかんり</rt></ruby></p><p class="word__meaning" data-uz="Sifat nazorati" data-ja="安全で同じ品質の製品を作るための管理" data-en="Quality control" data-ne="गुणस्तर नियन्त्रण">Sifat nazorati</p><p class="word__note" data-uz="Har bir mahsulot xavfsiz va bir xil sifatda bo'lishini tekshirish." data-ja="製品が安全で同じ品質になるように確認します。" data-en="Check that every product is safe and of consistent quality." data-ne="हरेक उत्पादन सुरक्षित र समान गुणस्तरको छ भनेर जाँचिन्छ।">Har bir mahsulot xavfsiz va bir xil sifatda bo'lishini tekshirish.</p></article>
+      <article class="word"><p class="word__term"><ruby>食中毒菌<rt>しょくちゅうどくきん</rt></ruby></p><p class="word__meaning" data-uz="Oziq-ovqatdan zaharlanishga sabab bo‘luvchi bakteriyalar" data-ja="食品を通じて食中毒を起こすことがある細菌" data-en="Bacteria that can cause food poisoning" data-ne="खाद्य विषाक्तता गराउन सक्ने ब्याक्टेरिया" data-my="အစာအဆိပ်သင့်စေနိုင်သော ဘက်တီးရီးယား">Oziq-ovqatdan zaharlanishga sabab bo‘luvchi bakteriyalar</p><p class="word__note" data-uz="Ko‘rinishi va hidi o‘zgarmagan ovqatda ham bunday bakteriyalar bo‘lishi mumkin." data-ja="見た目やにおいに異常がなくても食品に存在することがあります。" data-en="These bacteria may be present even when food looks and smells normal." data-ne="खाना हेर्दा र सुँघ्दा सामान्य भए पनि यी ब्याक्टेरिया हुन सक्छन्।" data-my="အစားအစာ၏ အသွင်အပြင်နှင့် အနံ့ ပုံမှန်ဖြစ်နေသော်လည်း ဘက်တီးရီးယား ရှိနိုင်သည်။">Ko‘rinishi va hidi o‘zgarmagan ovqatda ham bunday bakteriyalar bo‘lishi mumkin.</p></article>
+      <article class="word"><p class="word__term"><ruby>交差汚染<rt>こうさおせん</rt></ruby></p><p class="word__meaning" data-uz="O‘zaro ifloslanish" data-ja="食品や器具の間で汚染物質が移ること" data-en="Cross-contamination" data-ne="एक वस्तुबाट अर्कोमा हुने दूषण" data-my="အပြန်အလှန် ညစ်ညမ်းကူးစက်ခြင်း">O‘zaro ifloslanish</p><p class="word__note" data-uz="Xom go‘sht va tayyor ovqat uchun alohida pichoq hamda taxtadan foydalaning." data-ja="生の肉と加熱済み食品には別々の器具を使います。" data-en="Use separate utensils for raw meat and ready-to-eat food." data-ne="काँचो मासु र खान तयार परिकारका लागि छुट्टाछुट्टै औजार प्रयोग गर्नुहोस्।" data-my="အသားစိမ်းနှင့် အသင့်စားအစားအစာအတွက် သီးခြားကိရိယာများ သုံးပါ။">Xom go‘sht va tayyor ovqat uchun alohida pichoq hamda taxtadan foydalaning.</p></article>
+      <article class="word"><p class="word__term"><ruby>アレルゲン<rt>あれるげん</rt></ruby></p><p class="word__meaning" data-uz="Allergiya chaqiruvchi modda" data-ja="アレルギー反応を起こす原因となる物質" data-en="Allergen" data-ne="एलर्जी गराउने पदार्थ" data-my="ဓာတ်မတည့်မှု ဖြစ်စေသော ပစ္စည်း">Allergiya chaqiruvchi modda</p><p class="word__note" data-uz="Retseptdagi allergen o‘zgarsa, mahsulot yorlig‘i ham qayta tekshiriladi." data-ja="原材料を変更したときは、アレルゲン表示を確認し直します。" data-en="Recheck allergen labeling whenever ingredients change." data-ne="सामग्री परिवर्तन हुँदा एलर्जीकारक पदार्थको लेबल फेरि जाँच्नुहोस्।" data-my="ပါဝင်ပစ္စည်းများ ပြောင်းလဲပါက ဓာတ်မတည့်မှုဖြစ်စေသောပစ္စည်း ဖော်ပြချက်ကို ပြန်စစ်ပါ။">Retseptdagi allergen o‘zgarsa, mahsulot yorlig‘i ham qayta tekshiriladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>受入検査<rt>うけいれけんさ</rt></ruby></p><p class="word__meaning" data-uz="Qabul qilishdagi tekshiruv" data-ja="納入された原材料の状態や温度を確認する検査" data-en="Incoming inspection" data-ne="आपूर्ति सामग्रीको प्राप्ति जाँच" data-my="လက်ခံရရှိသော ကုန်ကြမ်းကို စစ်ဆေးခြင်း">Qabul qilishdagi tekshiruv</p><p class="word__note" data-uz="Xomashyo qabulida harorat, qadoq va muddatni belgilangan mezonlar bilan tekshiring." data-ja="原材料の温度、包装、期限を受入基準に照らして確認します。" data-en="Check incoming ingredients against temperature, packaging, and date criteria." data-ne="कच्चा पदार्थको तापक्रम, प्याकेजिङ र मिति तोकिएको मापदण्डसँग जाँच्नुहोस्।" data-my="ကုန်ကြမ်းလက်ခံရာတွင် အပူချိန်၊ ထုပ်ပိုးမှုနှင့် သက်တမ်းကို သတ်မှတ်စံနှုန်းများနှင့် တိုက်စစ်ပါ။">Xomashyo qabulida harorat, qadoq va muddatni belgilangan mezonlar bilan tekshiring.</p></article>
+      <article class="word"><p class="word__term"><ruby>解凍<rt>かいとう</rt></ruby></p><p class="word__meaning" data-uz="Muzdan tushirish" data-ja="凍った食品を安全な方法でとかすこと" data-en="Thawing / defrosting" data-ne="जमेको खाना पगाल्ने काम" data-my="အေးခဲထားသော အစားအစာကို အရည်ပျော်စေခြင်း">Muzdan tushirish</p><p class="word__note" data-uz="Muzlatilgan mahsulotni xona haroratida uzoq qoldirmay, tasdiqlangan usulda muzdan tushiring." data-ja="冷凍食品は室温に長く置かず、決められた方法で解凍します。" data-en="Thaw frozen food using an approved method rather than leaving it at room temperature." data-ne="जमेको खाना कोठाको तापक्रममा लामो समय नराखी तोकिएको विधिले पगाल्नुहोस्।" data-my="အေးခဲအစားအစာကို အခန်းအပူချိန်တွင် ကြာရှည်မထားဘဲ သတ်မှတ်ထားသောနည်းဖြင့် အရည်ပျော်စေပါ။">Muzlatilgan mahsulotni xona haroratida uzoq qoldirmay, tasdiqlangan usulda muzdan tushiring.</p></article>
+      <article class="word"><p class="word__term"><ruby>中心温度<rt>ちゅうしんおんど</rt></ruby></p><p class="word__meaning" data-uz="Mahsulot markazidagi harorat" data-ja="食品の中心部分で測る温度" data-en="Core temperature" data-ne="खानाको केन्द्र भागको तापक्रम" data-my="အစားအစာအလယ်ပိုင်း၏ အပူချိန်">Mahsulot markazidagi harorat</p><p class="word__note" data-uz="Qizdirish yetarliligini tekshirish uchun mahsulotning markaziy haroratini o‘lchang." data-ja="加熱が十分か確認するため、食品の中心温度を測定します。" data-en="Measure the core temperature to verify that heating is sufficient." data-ne="तताउने प्रक्रिया पर्याप्त छ कि छैन जाँच्न खानाको केन्द्रको तापक्रम मापन गर्नुहोस्।" data-my="အပူပေးမှု လုံလောက်ကြောင်း စစ်ဆေးရန် အစားအစာအလယ်ပိုင်း၏ အပူချိန်ကို တိုင်းပါ။">Qizdirish yetarliligini tekshirish uchun mahsulotning markaziy haroratini o‘lchang.</p></article>
+      <article class="word"><p class="word__term"><ruby>急速冷却<rt>きゅうそくれいきゃく</rt></ruby></p><p class="word__meaning" data-uz="Tez sovitish" data-ja="食品を短時間で必要な温度まで冷ますこと" data-en="Rapid cooling" data-ne="छिटो चिस्याउने प्रक्रिया" data-my="လျင်မြန်စွာ အအေးခံခြင်း">Tez sovitish</p><p class="word__note" data-uz="Pishgan mahsulotni belgilangan tartibda tez sovitish bakteriyalar ko‘payish xavfini kamaytiradi." data-ja="加熱後の食品を速やかに冷却し、細菌が増えやすい時間を短くします。" data-en="Cool cooked food promptly to limit time in temperatures where bacteria can grow." data-ne="ब्याक्टेरिया बढ्न सक्ने तापक्रममा रहने समय घटाउन पकाएको खाना छिटो चिस्याउनुहोस्।" data-my="ဘက်တီးရီးယား ပွားနိုင်သည့် အပူချိန်တွင် နေချိန်လျှော့ချရန် ချက်ပြီးအစားအစာကို အမြန်အအေးခံပါ။">Pishgan mahsulotni belgilangan tartibda tez sovitish bakteriyalar ko‘payish xavfini kamaytiradi.</p></article>
+      <article class="word"><p class="word__term"><ruby>殺菌<rt>さっきん</rt></ruby></p><p class="word__meaning" data-uz="Mikroblarni yo‘qotish yoki kamaytirish" data-ja="加熱などで微生物を死滅または減少させること" data-en="Microbial destruction / reduction" data-ne="सूक्ष्मजीव नष्ट वा कम गर्ने काम" data-my="ပိုးမွှားများကို သတ်ခြင်း သို့မဟုတ် လျှော့ချခြင်း">Mikroblarni yo‘qotish yoki kamaytirish</p><p class="word__note" data-uz="Mahsulot turiga mos tasdiqlangan vaqt va haroratda sterilizatsiya jarayonini bajaring." data-ja="製品に合った時間と温度で、定められた殺菌工程を行います。" data-en="Apply the validated time-and-temperature treatment specified for the product." data-ne="उत्पादनअनुसार प्रमाणित समय र तापक्रममा तोकिएको सूक्ष्मजीव नाश प्रक्रिया गर्नुहोस्।" data-my="ထုတ်ကုန်နှင့်ကိုက်ညီသော သတ်မှတ်ထားသည့် အချိန်နှင့်အပူချိန်အတိုင်း ပိုးသတ်လုပ်ငန်းစဉ်ကို လုပ်ဆောင်ပါ။">Mahsulot turiga mos tasdiqlangan vaqt va haroratda sterilizatsiya jarayonini bajaring.</p></article>
+      <article class="word"><p class="word__term"><ruby>洗浄<rt>せんじょう</rt></ruby></p><p class="word__meaning" data-uz="Yuvib tozalash" data-ja="水や洗剤で汚れを取り除くこと" data-en="Cleaning / washing" data-ne="धोएर सफा गर्ने काम" data-my="ဆေးကြောသန့်ရှင်းခြင်း">Yuvib tozalash</p><p class="word__note" data-uz="Avval ko‘rinadigan kir va oziq-ovqat qoldiqlarini yuvib tashlang; keyin zarur bo‘lsa dezinfeksiya qiling." data-ja="まず汚れや食品残さを洗い落とし、必要な場合はその後に消毒します。" data-en="Remove soil and food residue first; disinfect afterward when required." data-ne="पहिले फोहोर र खाद्य अवशेष धोएर हटाउनुहोस्; आवश्यक भए त्यसपछि कीटाणुमुक्त गर्नुहोस्।" data-my="အညစ်အကြေးနှင့် အစားအစာအကြွင်းအကျန်များကို အရင်ဆေးကြောပြီး လိုအပ်ပါက ထို့နောက် ပိုးသတ်ပါ။">Avval ko‘rinadigan kir va oziq-ovqat qoldiqlarini yuvib tashlang; keyin zarur bo‘lsa dezinfeksiya qiling.</p></article>
+      <article class="word"><p class="word__term"><ruby>手洗い<rt>てあらい</rt></ruby></p><p class="word__meaning" data-uz="Qo‘l yuvish" data-ja="石けんと流水で手の汚れを落とすこと" data-en="Handwashing" data-ne="हात धुने काम" data-my="လက်ဆေးခြင်း">Qo‘l yuvish</p><p class="word__note" data-uz="Ish boshlashdan oldin va xom mahsulot bilan ishlagandan keyin qo‘llarni belgilangan tartibda yuving." data-ja="作業開始前や生の原材料を扱った後は、手順に従って手を洗います。" data-en="Wash hands according to procedure before work and after handling raw ingredients." data-ne="काम सुरु गर्नुअघि र काँचो सामग्री छोएपछि प्रक्रियाअनुसार हात धुनुहोस्।" data-my="အလုပ်မစမီနှင့် ကုန်ကြမ်းအသားစိမ်းများ ကိုင်တွယ်ပြီးနောက် လုပ်ထုံးလုပ်နည်းအတိုင်း လက်ဆေးပါ။">Ish boshlashdan oldin va xom mahsulot bilan ishlagandan keyin qo‘llarni belgilangan tartibda yuving.</p></article>
+      <article class="word"><p class="word__term"><ruby>手指消毒<rt>しゅししょうどく</rt></ruby></p><p class="word__meaning" data-uz="Qo‘l va barmoqlarni dezinfeksiya qilish" data-ja="手洗い後に薬剤を使って手指の微生物を減らすこと" data-en="Hand sanitizing" data-ne="हातमा कीटाणुनाशक प्रयोग गर्ने काम" data-my="လက်နှင့်လက်ချောင်းများကို ပိုးသတ်ခြင်း">Qo‘l va barmoqlarni dezinfeksiya qilish</p><p class="word__note" data-uz="Ko‘rinadigan kirni avval yuvib tashlang, so‘ng korxona belgilagan vositani qo‘llang." data-ja="目に見える汚れを先に洗い落とし、決められた薬剤で手指を消毒します。" data-en="Wash visible soil off first, then use the sanitizer specified by the facility." data-ne="देखिने फोहोर पहिले धोएर हटाउनुहोस्, त्यसपछि संस्थाले तोकेको कीटाणुनाशक प्रयोग गर्नुहोस्।" data-my="မြင်ရသောအညစ်အကြေးကို အရင်ဆေးကြောပြီးနောက် လုပ်ငန်းက သတ်မှတ်ထားသည့် ပိုးသတ်ဆေးကို သုံးပါ။">Ko‘rinadigan kirni avval yuvib tashlang, so‘ng korxona belgilagan vositani qo‘llang.</p></article>
+      <article class="word"><p class="word__term"><ruby>作業着<rt>さぎょうぎ</rt></ruby></p><p class="word__meaning" data-uz="Ish kiyimi" data-ja="作業区域で着用する専用の服" data-en="Work clothing" data-ne="काम गर्ने पोशाक" data-my="လုပ်ငန်းခွင်အဝတ်အစား">Ish kiyimi</p><p class="word__note" data-uz="Ish kiyimini toza saqlang va ishlab chiqarish hududidan tashqarida kiyib yurmang." data-ja="作業着を清潔に保ち、製造区域の外では着用しないようにします。" data-en="Keep work clothing clean and do not wear it outside the production area." data-ne="काम गर्ने पोशाक सफा राख्नुहोस् र उत्पादन क्षेत्रबाहिर नलगाउनुहोस्।" data-my="လုပ်ငန်းခွင်အဝတ်အစားကို သန့်ရှင်းစွာထားပြီး ထုတ်လုပ်ရေးဧရိယာပြင်ပတွင် မဝတ်ပါနှင့်။">Ish kiyimini toza saqlang va ishlab chiqarish hududidan tashqarida kiyib yurmang.</p></article>
+      <article class="word"><p class="word__term"><ruby>健康確認<rt>けんこうかくにん</rt></ruby></p><p class="word__meaning" data-uz="Sog‘liq holatini tekshirish" data-ja="作業前に体調や症状を確認すること" data-en="Health check" data-ne="स्वास्थ्य अवस्था जाँच" data-my="ကျန်းမာရေးအခြေအနေ စစ်ဆေးခြင်း">Sog‘liq holatini tekshirish</p><p class="word__note" data-uz="Isitma, ich ketishi yoki qusish alomatlarini rahbarga xabar qiling va oziq-ovqat bilan ishlash bo‘yicha ko‘rsatmaga amal qiling." data-ja="発熱、下痢、嘔吐などがある場合は責任者に報告し、食品を扱う作業の指示に従います。" data-en="Report fever, diarrhea, or vomiting to the supervisor and follow food-handling instructions." data-ne="ज्वरो, पखाला वा वान्ता भए जिम्मेवार व्यक्तिलाई जानकारी दिनुहोस् र खाना सम्हाल्ने निर्देशन पालना गर्नुहोस्।" data-my="ဖျားခြင်း၊ ဝမ်းလျှောခြင်း သို့မဟုတ် အန်ခြင်းရှိပါက ကြီးကြပ်သူထံ တင်ပြပြီး အစားအစာကိုင်တွယ်မှုဆိုင်ရာ ညွှန်ကြားချက်ကို လိုက်နာပါ။">Isitma, ich ketishi yoki qusish alomatlarini rahbarga xabar qiling va oziq-ovqat bilan ishlash bo‘yicha ko‘rsatmaga amal qiling.</p></article>
+      <article class="word"><p class="word__term"><ruby>手袋交換<rt>てぶくろこうかん</rt></ruby></p><p class="word__meaning" data-uz="Qo‘lqopni almashtirish" data-ja="汚れたり作業内容が変わったりしたとき手袋を新しくすること" data-en="Changing gloves" data-ne="पञ्जा फेर्ने काम" data-my="လက်အိတ်လဲလှယ်ခြင်း">Qo‘lqopni almashtirish</p><p class="word__note" data-uz="Qo‘lqop yirtilsa yoki xom va tayyor mahsulot ishlarini almashtirsangiz, yangisini kiying." data-ja="手袋が破れたときや作業内容が変わるときは、新しい手袋に交換します。" data-en="Replace gloves if torn or when switching between raw and ready-to-eat work." data-ne="पञ्जा च्यातिएमा वा काँचो र खान तयार वस्तुको काम बदल्दा नयाँ पञ्जा लगाउनुहोस्।" data-my="လက်အိတ်ပေါက်ပြဲပါက သို့မဟုတ် အသားစိမ်းနှင့် အသင့်စားအစားအစာလုပ်ငန်း ပြောင်းလဲပါက အသစ်လဲပါ။">Qo‘lqop yirtilsa yoki xom va tayyor mahsulot ishlarini almashtirsangiz, yangisini kiying.</p></article>
+      <article class="word"><p class="word__term"><ruby>食品表示<rt>しょくひんひょうじ</rt></ruby></p><p class="word__meaning" data-uz="Oziq-ovqat mahsuloti yorlig‘idagi ma’lumot" data-ja="食品の名称や原材料などを伝える表示" data-en="Food labeling" data-ne="खाद्य पदार्थको लेबल" data-my="အစားအစာအညွှန်း">Oziq-ovqat mahsuloti yorlig‘idagi ma’lumot</p><p class="word__note" data-uz="Mahsulot yorlig‘idagi tarkib va allergen ma’lumotlarini tasdiqlangan retsept bilan solishtiring." data-ja="表示の原材料やアレルゲン情報を、承認された配合と照合します。" data-en="Check ingredient and allergen information against the approved formulation." data-ne="लेबलमा भएका सामग्री र एलर्जीकारक जानकारीलाई स्वीकृत नुस्खासँग मिलाउनुहोस्।" data-my="အညွှန်းပါ ပါဝင်ပစ္စည်းနှင့် ဓာတ်မတည့်မှု အချက်အလက်များကို အတည်ပြုထားသော ဖော်မြူလာနှင့် တိုက်စစ်ပါ။">Mahsulot yorlig‘idagi tarkib va allergen ma’lumotlarini tasdiqlangan retsept bilan solishtiring.</p></article>
+      <article class="word"><p class="word__term"><ruby>ロット番号<rt>ろっとばんごう</rt></ruby></p><p class="word__meaning" data-uz="Partiya raqami" data-ja="同じ条件で製造した製品のまとまりを示す番号" data-en="Lot / batch number" data-ne="उत्पादन लट नम्बर" data-my="ထုတ်လုပ်မှုအသုတ်နံပါတ်">Partiya raqami</p><p class="word__note" data-uz="Partiya raqami mahsulotni ishlab chiqarish yozuvlari va yetkazib berish bilan bog‘lashga yordam beradi." data-ja="ロット番号を製造記録や出荷記録と結び付けて管理します。" data-en="Link the lot number to production and shipping records." data-ne="लट नम्बरलाई उत्पादन र ढुवानी अभिलेखसँग जोडेर राख्नुहोस्।" data-my="အသုတ်နံပါတ်ကို ထုတ်လုပ်မှုနှင့် ပို့ဆောင်မှုမှတ်တမ်းများနှင့် ချိတ်ဆက်ထားပါ။">Partiya raqami mahsulotni ishlab chiqarish yozuvlari va yetkazib berish bilan bog‘lashga yordam beradi.</p></article>
+      <article class="word"><p class="word__term"><ruby>追跡可能性<rt>ついせきかのうせい</rt></ruby></p><p class="word__meaning" data-uz="Kuzatib borish imkoniyati" data-ja="原材料から製品や出荷先まで履歴をたどれること" data-en="Traceability" data-ne="उत्पादनको स्रोत र बाटो पछ्याउन सक्ने क्षमता" data-my="ထုတ်ကုန်၏ မူလရင်းမြစ်နှင့် လမ်းကြောင်းကို ခြေရာခံနိုင်မှု">Kuzatib borish imkoniyati</p><p class="word__note" data-uz="Yozuvlarni saqlash mahsulot muammosi yuz bersa, tegishli partiyani aniqlash imkonini beradi." data-ja="記録を残すと、問題発生時に対象ロットを特定できます。" data-en="Records help identify affected lots when a product problem occurs." data-ne="समस्या हुँदा अभिलेखले प्रभावित लट पहिचान गर्न मद्दत गर्छ।" data-my="ထုတ်ကုန်ပြဿနာဖြစ်ပါက မှတ်တမ်းများက သက်ဆိုင်ရာအသုတ်ကို ရှာဖွေဖော်ထုတ်နိုင်စေသည်။">Yozuvlarni saqlash mahsulot muammosi yuz bersa, tegishli partiyani aniqlash imkonini beradi.</p></article>
+      <article class="word"><p class="word__term"><ruby>金属検出機<rt>きんぞくけんしゅつき</rt></ruby></p><p class="word__meaning" data-uz="Metall aniqlash qurilmasi" data-ja="製品に混入した金属片を検出する機械" data-en="Metal detector" data-ne="धातु पत्ता लगाउने उपकरण" data-my="သတ္တုစစ်ဆေးစက်">Metall aniqlash qurilmasi</p><p class="word__note" data-uz="Belgilangan sinov namunalari bilan qurilmaning ishlashini tekshirib, natijalarni qayd eting." data-ja="決められたテスト片で作動を確認し、結果を記録します。" data-en="Test operation with the specified test pieces and record the results." data-ne="तोकिएका परीक्षण टुक्राले उपकरण जाँचेर नतिजा अभिलेख गर्नुहोस्।" data-my="သတ်မှတ်ထားသော စမ်းသပ်ပစ္စည်းများဖြင့် စက်၏လုပ်ဆောင်မှုကို စစ်ဆေးပြီး ရလဒ်များကို မှတ်တမ်းတင်ပါ။">Belgilangan sinov namunalari bilan qurilmaning ishlashini tekshirib, natijalarni qayd eting.</p></article>
+      <article class="word"><p class="word__term"><ruby>期限表示<rt>きげんひょうじ</rt></ruby></p><p class="word__meaning" data-uz="Yaroqlilik muddati yozuvi" data-ja="食品を安全または適切な品質で使える期限の表示" data-en="Date marking / shelf-life label" data-ne="म्यादसम्बन्धी लेबल" data-my="သက်တမ်းကုန်ဆုံးရက် ဖော်ပြချက်">Yaroqlilik muddati yozuvi</p><p class="word__note" data-uz="Muddatni mahsulot turi va tasdiqlangan tartibga muvofiq belgilang; eski sanani o‘zgartirmang." data-ja="食品の種類と定められた基準に従って期限を表示し、日付を書き換えません。" data-en="Set dates according to product and approved rules; never alter an existing date." data-ne="उत्पादन र स्वीकृत नियमअनुसार मिति राख्नुहोस्; पुरानो मिति नबदल्नुहोस्।" data-my="ထုတ်ကုန်အမျိုးအစားနှင့် အတည်ပြုထားသောစည်းမျဉ်းအတိုင်း ရက်စွဲဖော်ပြပြီး ရက်စွဲဟောင်းကို မပြောင်းပါနှင့်။">Muddatni mahsulot turi va tasdiqlangan tartibga muvofiq belgilang; eski sanani o‘zgartirmang.</p></article>
+      <article class="word"><p class="word__term"><ruby>重要管理点<rt>じゅうようかんりてん</rt></ruby></p><p class="word__meaning" data-uz="Muhim nazorat nuqtasi (CCP)" data-ja="食品安全上の危害を防止または許容範囲に管理する工程上の点" data-en="Critical control point (CCP)" data-ne="महत्त्वपूर्ण नियन्त्रण बिन्दु (CCP)" data-my="အရေးကြီးသော ထိန်းချုပ်မှုအချက် (CCP)">Muhim nazorat nuqtasi (CCP)</p><p class="word__note" data-uz="CCPda belgilangan chegarani nazorat qiling; og‘ish bo‘lsa, mahsulotni ajratib tuzatish choralarini ko‘ring." data-ja="重要管理点では基準を監視し、逸脱時は製品を分けて是正措置を行います。" data-en="Monitor CCP limits and segregate product for corrective action when a limit is missed." data-ne="CCP को सीमा अनुगमन गर्नुहोस्; सीमा नाघेमा उत्पादन छुट्याएर सुधारात्मक कदम चाल्नुहोस्।" data-my="CCP ကန့်သတ်ချက်များကို စောင့်ကြည့်ပါ။ မကိုက်ညီပါက ထုတ်ကုန်ကို သီးခြားခွဲ၍ ပြုပြင်ဆောင်ရွက်ပါ။">CCPda belgilangan chegarani nazorat qiling; og‘ish bo‘lsa, mahsulotni ajratib tuzatish choralarini ko‘ring.</p></article>
+    </section>
+    <nav class="pager" aria-label="ページ移動">
+      <button id="previous" type="button">前へ</button>
+      <span id="pageStatus" class="page-status"></span>
+      <button id="next" type="button">次へ</button>
+    </nav>
+  </main>
+  <script>
+    const labels = {
+      uz: {
+        eyebrow: 'Tokutei Ginou · Oziq-ovqat ishlab chiqarish',
+        title: "Oziq-ovqat ishlab chiqarish lug'ati",
+        lead: "Oziq-ovqat ishlab chiqarishdagi muhim yaponcha so'zlarni takrorlang.",
+        list: 'Asosiy atamalar',
+        back: 'Ortga',
+        notebook: 'Xatolar daftarim'
+      },
+      ja: {
+        eyebrow: '特定技能 · 食品製造',
+        title: '食品製造分野の語彙',
+        lead: '食品工場で使う大切な日本語を復習しましょう。',
+        list: '基本用語',
+        back: '戻る',
+        notebook: '間違いノート'
+      },
+      en: {
+        eyebrow: 'Specified Skilled Worker · Food Manufacturing',
+        title: 'Food manufacturing vocabulary',
+        lead: 'Review essential Japanese terms used in food production.',
+        list: 'Key terms',
+        back: 'Back',
+        notebook: 'My mistakes'
+      },
+      ne: {
+        eyebrow: 'विशिष्ट दक्ष कामदार · खाद्य उत्पादन',
+        title: 'खाद्य उत्पादन शब्दावली',
+        lead: 'खाद्य उत्पादनमा प्रयोग हुने महत्त्वपूर्ण जापानी शब्दहरू दोहोर्याउनुहोस्।',
+        list: 'मुख्य शब्दहरू',
+        back: 'फर्कनुहोस्',
+        notebook: 'गल्तीहरूको नोटबुक'
+      },
+      my: {
+        eyebrow: 'သတ်မှတ်ကျွမ်းကျင်လုပ်သား · အစားအသောက်ထုတ်လုပ်မှု',
+        title: 'အစားအသောက်ထုတ်လုပ်မှု ဝေါဟာရ',
+        lead: 'အစားအသောက်ထုတ်လုပ်မှုတွင် အသုံးပြုသည့် အရေးကြီးသော ဂျပန်ဝေါဟာရများကို ပြန်လည်လေ့လာပါ။',
+        list: 'အဓိက ဝေါဟာရများ',
+        back: 'နောက်သို့',
+        notebook: 'အမှားမှတ်စု'
+      }
+    };
+    window.__VOCAB_PAGE_LABELS__ = labels;
+
+    function applyVocabLocale(lang) {
+      const activeLang = labels[lang] ? lang : 'ja';
+      const current = labels[activeLang] || labels.ja;
+      document.documentElement.lang = activeLang;
+      document.title = current.title;
+      const elEyebrow = document.getElementById('eyebrow');
+      if (elEyebrow) elEyebrow.textContent = current.eyebrow;
+      const elTitle = document.getElementById('title');
+      if (elTitle) elTitle.textContent = current.title;
+      const elLead = document.getElementById('lead');
+      if (elLead) elLead.textContent = current.lead;
+      const elList = document.getElementById('listTitle');
+      if (elList) elList.textContent = current.list;
+      const elBack = document.getElementById('back');
+      if (elBack) elBack.textContent = current.back;
+      const elNotebook = document.getElementById('notebookLink');
+      if (elNotebook) elNotebook.textContent = current.notebook;
+      document.querySelectorAll('[data-uz]').forEach((item) => {
+        item.textContent = item.dataset[activeLang] ?? item.dataset.ja ?? item.dataset.en ?? '';
+      });
+      const langSelect = document.getElementById('language');
+      if (langSelect && langSelect.value !== activeLang) {
+        langSelect.value = activeLang;
+      }
+    }
+
+    const language = localStorage.getItem('language') || 'ja';
+    applyVocabLocale(language);
+
+    const langSelect = document.getElementById('language');
+    if (langSelect) {
+      langSelect.value = labels[language] ? language : 'ja';
+      langSelect.addEventListener('change', (e) => {
+        const nextLang = labels[e.target.value] ? e.target.value : 'ja';
+        localStorage.setItem('language', nextLang);
+        applyVocabLocale(nextLang);
+      });
+    }
+
+    window.ThemeManager?.updateUI();
+  </script>
+  <script src="./mistake-notebook.js"></script>
+  <script src="./sector-vocabulary-reviewed.js"></script>
+  <script src="./foodmanufacturing-vocabulary-1000.js"></script>
+  <script src="./vocabulary-page.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

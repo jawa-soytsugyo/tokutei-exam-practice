@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Umumiy ovqatlanish - O'qish turini tanlash</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <style>
+    :root {
+      --bg: #f1f6ff;
+      --panel: #ffffff;
+      --panel-soft: #eef3fb;
+      --text: #172033;
+      --muted: #637084;
+      --line: #dbe3ea;
+      --accent: #0f766e;
+      --accent-strong: #115e59;
+      --gold: #d99825;
+      --shadow: 0 18px 45px rgba(35, 47, 63, 0.12);
+      font-size: 16px;
+    }
+
+    body.dark {
+      --bg: #070c16;
+      --panel: #161e2b;
+      --panel-soft: #202b3b;
+      --text: #edf3f7;
+      --muted: #a0afc4;
+      --line: rgba(255, 255, 255, 0.1);
+      --accent: #2dd4bf;
+      --accent-strong: #a5fff3;
+      --gold: #f0b94d;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+
+    body {
+      font-family: "Segoe UI", Arial, "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    body.dark {
+      background: var(--bg);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(219, 227, 234, 0.9);
+      background: color-mix(in srgb, var(--panel) 88%, transparent);
+      backdrop-filter: blur(16px);
+    }
+
+    body.dark .topbar { background: color-mix(in srgb, var(--panel) 88%, transparent); }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(15, 118, 110, 0.25);
+      flex: 0 0 auto;
+    }
+    .brand-title { font-size: 0.95rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-subtitle { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+    .settings { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .control-group {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    body.dark .control-group { background: var(--panel); }
+    .control-label { padding-left: 8px; color: var(--muted); font-size: 0.86rem; font-weight: 700; }
+    select, button { font: inherit; }
+    select { height: 32px; border: 0; border-radius: 6px; background: transparent; color: var(--text); font-weight: 700; cursor: pointer; outline: none; }
+    .font-button, .back-button {
+      min-width: 36px;
+      height: 32px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 10px;
+    }
+    .font-button:hover, .back-button:hover, select:hover { background: var(--panel-soft); }
+    .theme-toggle { min-width: 72px; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; }
+
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 46px 0 56px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); gap: 28px; align-items: stretch; margin-bottom: 30px; }
+    .hero-copy { padding: 34px 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid rgba(15, 118, 110, 0.22);
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    h1 { max-width: 760px; font-size: clamp(2.15rem, 5vw, 4.2rem); line-height: 1.02; letter-spacing: 0; margin-bottom: 18px; }
+    [data-ja] ruby { ruby-align: center; }
+    [data-ja] rt { font-size: 0.45em; line-height: 1; font-weight: 700; }
+    .lead { max-width: 650px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(15, 118, 110, 0.92), rgba(17, 94, 89, 0.95)), #0f766e;
+      color: #ffffff;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero-panel::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; pointer-events: none; }
+    .metric, .mini-list { position: relative; }
+    .metric-number { font-size: clamp(3.4rem, 10vw, 6.6rem); line-height: 0.9; font-weight: 900; }
+    .metric-label { max-width: 280px; color: rgba(255, 255, 255, 0.82); font-size: 1rem; }
+    .mini-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mini-item { min-height: 62px; border-radius: 8px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.14); padding: 12px; display: flex; align-items: end; color: #ffffff; text-decoration: none; font-weight: 800; font-size: 0.86rem; transition: background 180ms ease, transform 180ms ease; }
+    .mini-item:hover, .mini-item:focus-visible { background: rgba(255, 255, 255, 0.24); transform: translateY(-2px); outline: 2px solid rgba(255, 255, 255, 0.8); outline-offset: 2px; }
+
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin: 10px 0 16px; }
+    h2 { font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.15; }
+    .section-note { color: var(--muted); font-size: 0.95rem; text-align: right; }
+    .themes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .theme-card {
+      min-height: 218px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 0 8px 26px rgba(35, 47, 63, 0.06);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    body.dark .theme-card { background: var(--panel); }
+    .theme-card:hover, .theme-card:focus-visible { transform: translateY(-4px); border-color: rgba(15, 118, 110, 0.45); box-shadow: var(--shadow); outline: none; }
+    .theme-title { margin-top: 0; font-size: clamp(1.25rem, 2.5vw, 1.85rem); line-height: 1.12; font-weight: 900; }
+    .theme-desc { color: var(--muted); font-size: 0.95rem; }
+    .theme-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--accent-strong); font-weight: 900; }
+    .arrow { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; background: rgba(15, 118, 110, 0.1); flex: 0 0 auto; }
+
+    @media (max-width: 900px) {
+      .topbar-inner { min-height: auto; padding: 12px 0; align-items: flex-start; flex-direction: column; }
+      .settings { width: 100%; justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 18px 0 0; }
+    }
+    @media (max-width: 620px) {
+      .brand-title, .brand-subtitle { white-space: normal; }
+      main { width: min(100% - 24px, 1180px); padding-top: 28px; }
+      .control-group { width: 100%; }
+      select { flex: 1; }
+      .hero-panel { min-height: 240px; padding: 22px; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .section-note { text-align: left; }
+      .themes-grid { grid-template-columns: 1fr; }
+      .theme-card { min-height: 190px; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-sector="foodservice">
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <a class="back-button" href="./index.html" data-i18n="back">戻る</a>
+        <div>
+          <div class="brand-title" data-i18n="brandTitle">特定技能練習問題</div>
+          <div class="brand-subtitle" data-i18n="brandSubtitle">試験練習プラットフォーム</div>
+        </div>
+      </div>
+
+      <div class="settings">
+        <a class="back-button notebook-link" href="./mistakes.html" data-i18n="notebook">間違いノート</a>
+        <div class="control-group">
+          <label class="control-label" for="langSelect" data-i18n="languageLabel">言語</label>
+          <select id="langSelect" onchange="changeLanguage(this.value)" aria-label="Language">
+            <option value="uz">O'zbek</option>
+            <option value="ja" selected>日本語</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <div class="control-group" aria-label="Font size controls">
+          <button class="font-button" type="button" onclick="decreaseFont()" title="Kichraytirish">A-</button>
+          <button class="font-button" type="button" onclick="resetFont()" title="Tiklash">A</button>
+          <button class="font-button" type="button" onclick="increaseFont()" title="Kattalashtirish">A+</button>
+        </div>
+        <div class="control-group">
+          <button id="themeToggle" class="font-button theme-toggle" type="button" onclick="toggleTheme()">夜モード</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="back-to-home-row">
+      <a class="secondary-button" href="./index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span data-i18n="back">戻る</span>
+      </a>
+    </div>
+
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="hero-copy">
+        <div class="eyebrow" data-i18n="eyebrow">学習モード選択</div>
+        <h1 id="pageTitle" data-i18n="fieldTitle">外食業</h1>
+        <p class="lead" data-i18n="subtitle">語彙または練習問題を選んでください。</p>
+      </div>
+
+      <aside class="hero-panel" aria-label="Study summary">
+        <div class="metric">
+          <div class="metric-number">290</div>
+          <div class="metric-label" data-i18n="metricLabel">本試験形式演習問題</div>
+        </div>
+        <div class="mini-list">
+          <a class="mini-item" href="./foodservice-vocab.html" data-i18n="miniVocabulary">語彙</a>
+          <a class="mini-item" href="./foodservice.html" data-i18n="miniPractice">練習</a>
+        </div>
+      </aside>
+    </section>
+
+    <section aria-labelledby="modesHeading">
+      <div class="section-head">
+        <h2 id="modesHeading" data-i18n="modesTitle">モードを選択</h2>
+        <p class="section-note" data-i18n="modesNote">公式試験問題の転載ではなく、公開された出題範囲に基づく非公式教材です。</p>
+      </div>
+      <div class="themes-grid">
+        <a class="theme-card" href="./foodservice.html">
+          <div class="theme-card__main">
+            <div class="theme-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+            </div>
+            <div>
+              <h3 class="theme-title" data-i18n="practiceTitle">練習問題</h3>
+              <p class="theme-desc" data-i18n="practiceDesc"></p>
+            </div>
+          </div>
+          <div class="theme-footer">
+            <span data-i18n="openMode">始める</span>
+            <span class="arrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </span>
+          </div>
+        </a>
+        <a class="theme-card" href="./foodservice-vocab.html">
+          <div class="theme-card__main">
+            <div class="theme-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
+            <div>
+              <h3 class="theme-title" data-i18n="vocabTitle">言葉の練習</h3>
+              <p class="theme-desc" data-i18n="vocabDesc"></p>
+            </div>
+          </div>
+          <div class="theme-footer">
+            <span data-i18n="openMode">始める</span>
+            <span class="arrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const translations = {
+      uz: {
+        brandTitle: '特定技能練習問題',
+        brandSubtitle: 'Imtihonga tayyorlanish platformasi',
+        languageLabel: 'Til',
+        back: 'Ortga',
+        eyebrow: 'O\'qish turini tanlash',
+        fieldTitle: 'Umumiy ovqatlanish',
+        subtitle: 'Lug\'at yoki test mashqlaridan birini tanlang.',
+        metricLabel: 'Jami test savollari',
+        miniVocabulary: 'Lug\'at',
+        miniPractice: 'Mashq',
+        modesTitle: 'Rejimni tanlang',
+        modesNote: 'Har bir rejim alohida ochiladi.',
+        vocabTitle: 'Lug\'at mashqlari',
+        vocabDesc: 'Muhim so\'zlar va atamalarni takrorlash.',
+        practiceTitle: 'Test mashqlari',
+        practiceDesc: '90 ta asosiy muhim savol va 200 ta amaliy-vaziyatli savol (jami 290 ta savol).',
+        openMode: 'Boshlash',
+        themeLight: 'Tun',
+        themeDark: 'Kun'
+      },
+      ja: {
+        brandTitle: '特定技能練習問題',
+        brandSubtitle: '試験練習プラットフォーム',
+        languageLabel: '言語',
+        back: '戻る',
+        eyebrow: '学習モード選択',
+        fieldTitle: '<ruby>外食業<rt>がいしょくぎょう</rt></ruby>',
+        subtitle: '語彙または練習問題を選んでください。',
+        metricLabel: '本試験形式演習問題',
+        miniVocabulary: '語彙',
+        miniPractice: '練習',
+        modesTitle: 'モードを選択',
+        modesNote: '公式試験問題の転載ではなく、公開された出題範囲に基づく非公式教材です。',
+        vocabTitle: '<ruby>言葉<rt>ことば</rt></ruby>の<ruby>練習<rt>れんしゅう</rt></ruby>',
+        vocabDesc: '重要な単語や用語を学びます。',
+        practiceTitle: '<ruby>練習<rt>れんしゅう</rt></ruby><ruby>問題<rt>もんだい</rt></ruby>',
+        practiceDesc: '本試験形式の実務判断・学科実技問題（全290問：基本90問＋応用200問）を学習します。',
+        openMode: '始める',
+        themeLight: '夜',
+        themeDark: '昼'
+      },
+      en: {
+        brandTitle: '特定技能練習問題',
+        brandSubtitle: 'Exam practice platform',
+        languageLabel: 'Language',
+        back: 'Back',
+        eyebrow: 'Choose study mode',
+        fieldTitle: 'Food service',
+        subtitle: 'Choose vocabulary or practice questions.',
+        metricLabel: 'Official practice questions',
+        miniVocabulary: 'Vocabulary',
+        miniPractice: 'Practice',
+        modesTitle: 'Choose a mode',
+        modesNote: 'These are unofficial original study questions, not copied official exam questions.',
+        vocabTitle: 'Vocabulary practice',
+        vocabDesc: 'Review important words and terms.',
+        practiceTitle: 'Practice questions',
+        practiceDesc: 'Study 290 authentic exam questions (90 core questions + 200 practical judgment questions).',
+        openMode: 'Start',
+        themeLight: 'Dark',
+        themeDark: 'Light'
+      }
+    };
+
+    let currentFontSize = 16;
+
+    function applyLanguage(lang) {
+      const dictionary = translations[lang] || translations.ja;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((element) => {
+        const key = element.dataset.i18n;
+        if (lang === 'ja') {
+          element.innerHTML = dictionary[key];
+          element.dataset.ja = 'true';
+        } else {
+          element.textContent = dictionary[key];
+          delete element.dataset.ja;
+        }
+      });
+      document.title = stripHtml(dictionary.fieldTitle) + ' - ' + stripHtml(dictionary.eyebrow);
+      document.getElementById('langSelect').value = lang;
+      updateThemeButton();
+    }
+
+    function stripHtml(value) {
+      const template = document.createElement('template');
+      template.innerHTML = value;
+      return template.content.textContent || '';
+    }
+
+    function changeLanguage(lang) {
+      localStorage.setItem('language', lang);
+      applyLanguage(lang);
+    }
+
+    function increaseFont() {
+      currentFontSize = Math.min(currentFontSize + 2, 24);
+      document.documentElement.style.fontSize = currentFontSize + 'px';
+      localStorage.setItem('fontSize', currentFontSize);
+    }
+
+    function decreaseFont() {
+      currentFontSize = Math.max(currentFontSize - 2, 12);
+      document.documentElement.style.fontSize = currentFontSize + 'px';
+      localStorage.setItem('fontSize', currentFontSize);
+    }
+
+    function resetFont() {
+      currentFontSize = 16;
+      document.documentElement.style.fontSize = '16px';
+      localStorage.setItem('fontSize', currentFontSize);
+    }
+
+    function applyTheme(theme) {
+      document.body.classList.toggle('dark', theme === 'dark');
+      localStorage.setItem('theme', theme);
+      updateThemeButton();
+    }
+
+    function toggleTheme() {
+      applyTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+    }
+
+    function updateThemeButton() {
+      if (window.ThemeManager) {
+        window.ThemeManager.updateUI();
+        return;
+      }
+      const button = document.getElementById('themeToggle');
+      if (!button) return;
+      const lang = document.getElementById('langSelect')?.value || 'ja';
+      const dictionary = translations[lang] || translations.ja;
+      const label = document.body.classList.contains('dark') ? dictionary.themeDark : dictionary.themeLight;
+      button.textContent = label;
+    }
+
+    function initializePage() {
+      const savedSize = parseInt(localStorage.getItem('fontSize'), 10);
+      const savedLanguage = localStorage.getItem('language') || 'ja';
+      const savedTheme = localStorage.getItem('theme') || 'light';
+
+      if (!Number.isNaN(savedSize)) {
+        currentFontSize = savedSize;
+        document.documentElement.style.fontSize = currentFontSize + 'px';
+      }
+
+      applyTheme(savedTheme);
+      applyLanguage(savedLanguage);
+    }
+
+    initializePage();
+  </script>
+  <script src="./firebase-bootstrap.js?v=20261116-1"></script>
+  <script src="./menu-locales.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

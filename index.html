@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="特定技能試験の練習問題を確認できるアプリ。建設・農業・外食業・飲食料品製造業・宿泊・自動車の問題を学習できます。" />
+  <meta name="keywords" content="特定技能, 練習問題, 建設, 農業, 外食業, 飲食料品製造業, 宿泊, 自動車" />
+  <title>特定技能練習問題</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "特定技能練習問題",
+        "description": "特定技能試験の練習問題を確認できるアプリ。建設・農業・外食業・飲食料品製造業・宿泊・自動車の問題を学習できます。",
+        "applicationCategory": "EducationalApplication",
+        "inLanguage": "ja"
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20261116-1" />
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            <path d="m9 9.5 2 2 4-4"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name" id="headerBrandTitle">特定技能練習問題</span>
+          <span class="brand-sub" id="headerBrandSub">特定技能1号 試験対策</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <a id="notebookNav" class="back notebook-link" href="./mistakes.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span id="notebookNavLabel">間違いノート</span>
+          <span id="notebookCountBadge" class="count-pill hidden">0</span>
+        </a>
+        <select id="languageSelect" aria-label="言語">
+          <option value="ja">日本語</option>
+          <option value="uz">O‘zbek</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="themeToggle" class="control theme-toggle" type="button" aria-label="テーマ切り替え"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section id="menuScreen" class="screen">
+      <div class="hero" aria-labelledby="appTitle">
+        <div class="hero__label" id="menuBrand">特定技能1号 学科・実技試験対策</div>
+        <h1 id="appTitle">特定技能練習問題</h1>
+        <p class="hero__subtitle" id="menuSubtitle">6つの分野の練習問題と重要語彙を、母国語の解説つきで学べます。</p>
+
+        <div class="portal-stats">
+          <div class="portal-stat">
+            <strong>6</strong>
+            <span id="statSectors">分野</span>
+          </div>
+          <span class="portal-stat__sep" aria-hidden="true">・</span>
+          <div class="portal-stat">
+            <strong>1,740</strong>
+            <span id="statQuestions">問</span>
+          </div>
+          <span class="portal-stat__sep" aria-hidden="true">・</span>
+          <div class="portal-stat">
+            <strong>6,000</strong>
+            <span id="statWords">語</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="guide-steps" aria-label="使い方">
+        <div class="guide-step">
+          <span class="guide-step__num">①</span>
+          <span class="guide-step__text" id="step1Text" data-i18n="step1">分野をえらぶ</span>
+        </div>
+        <div class="guide-step">
+          <span class="guide-step__num">②</span>
+          <span class="guide-step__text" id="step2Text" data-i18n="step2">練習問題・重要語彙で学ぶ</span>
+        </div>
+        <div class="guide-step">
+          <span class="guide-step__num">③</span>
+          <span class="guide-step__text" id="step3Text" data-i18n="step3">間違いノートで復習</span>
+        </div>
+      </nav>
+
+      <div class="section-heading-row">
+        <h2 class="section-heading" id="sectorsHeading" data-i18n="sectorsHeading">分野をえらぶ</h2>
+      </div>
+
+      <div class="menu-grid">
+        <article class="menu-card" data-sector="construction">
+          <div class="menu-card__top">
+            <div class="menu-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 18h20"></path>
+                <path d="M5 18v-5a7 7 0 0 1 14 0v5"></path>
+                <path d="M10 6V3h4v3"></path>
+                <path d="M12 13v5"></path>
+              </svg>
+            </div>
+            <span class="menu-card__code" data-sector-code="construction">分野 01</span>
+          </div>
+          <h2 data-sector-name="construction">建設</h2>
+          <p class="menu-card__desc" data-sector-desc="construction">土木・建築・ライフライン設備・安全衛生</p>
+          <div class="menu-card__badge" data-i18n-count="construction">全290問 · 重要語彙1,000語</div>
+          <div class="sector-actions">
+            <a class="primary-button" href="./construction.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <span data-i18n="start">練習問題</span>
+            </a>
+            <a class="secondary-button" href="./construction-vocab.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span data-i18n="vocabulary">重要語彙</span>
+            </a>
+          </div>
+          <a class="menu-card__more-link" href="./construction-menu.html">
+            <span data-i18n="sectorDetails">分野ガイド・学習モード</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <article class="menu-card" data-sector="agriculture">
+          <div class="menu-card__top">
+            <div class="menu-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22V10"></path>
+                <path d="M12 10a7 7 0 0 1 7-7c0 5-3 7-7 7Z"></path>
+                <path d="M12 14a6 6 0 0 0-6-6c0 4.5 2.5 6 6 6Z"></path>
+              </svg>
+            </div>
+            <span class="menu-card__code" data-sector-code="agriculture">分野 02</span>
+          </div>
+          <h2 data-sector-name="agriculture">農業</h2>
+          <p class="menu-card__desc" data-sector-desc="agriculture">施設園芸・畑作・果樹・畜産管理・安全衛生</p>
+          <div class="menu-card__badge" data-i18n-count="agriculture">全290問 · 重要語彙1,000語</div>
+          <div class="sector-actions">
+            <a class="primary-button" href="./agriculture.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <span data-i18n="start">練習問題</span>
+            </a>
+            <a class="secondary-button" href="./agriculture-vocab.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span data-i18n="vocabulary">重要語彙</span>
+            </a>
+          </div>
+          <a class="menu-card__more-link" href="./agriculture-menu.html">
+            <span data-i18n="sectorDetails">分野ガイド・学習モード</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <article class="menu-card" data-sector="foodservice">
+          <div class="menu-card__top">
+            <div class="menu-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2v20"></path>
+                <path d="M21 6a3 3 0 0 0-3-3"></path>
+                <path d="M3 2v7a3 3 0 0 0 3 3v10"></path>
+                <path d="M9 2v7a3 3 0 0 1-3 3"></path>
+                <path d="M6 2v7"></path>
+              </svg>
+            </div>
+            <span class="menu-card__code" data-sector-code="foodservice">分野 03</span>
+          </div>
+          <h2 data-sector-name="foodservice">外食業</h2>
+          <p class="menu-card__desc" data-sector-desc="foodservice">接客サービス・飲食物調理・衛生管理・店舗安全</p>
+          <div class="menu-card__badge" data-i18n-count="foodservice">全290問 · 重要語彙1,000語</div>
+          <div class="sector-actions">
+            <a class="primary-button" href="./foodservice.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <span data-i18n="start">練習問題</span>
+            </a>
+            <a class="secondary-button" href="./foodservice-vocab.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span data-i18n="vocabulary">重要語彙</span>
+            </a>
+          </div>
+          <a class="menu-card__more-link" href="./foodservice-menu.html">
+            <span data-i18n="sectorDetails">分野ガイド・学習モード</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <article class="menu-card" data-sector="foodmanufacturing">
+          <div class="menu-card__top">
+            <div class="menu-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20"></path>
+                <path d="M3 20V8l5 3V8l5 3V4l7 4v12"></path>
+                <circle cx="17" cy="13" r="1"></circle>
+                <circle cx="17" cy="16" r="1"></circle>
+              </svg>
+            </div>
+            <span class="menu-card__code" data-sector-code="foodmanufacturing">分野 04</span>
+          </div>
+          <h2 data-sector-name="foodmanufacturing">飲食料品製造業</h2>
+          <p class="menu-card__desc" data-sector-desc="foodmanufacturing">製造工程・HACCP・品質管理・衛生安全</p>
+          <div class="menu-card__badge" data-i18n-count="foodmanufacturing">全290問 · 重要語彙1,000語</div>
+          <div class="sector-actions">
+            <a class="primary-button" href="./foodmanufacturing.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <span data-i18n="start">練習問題</span>
+            </a>
+            <a class="secondary-button" href="./foodmanufacturing-vocab.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span data-i18n="vocabulary">重要語彙</span>
+            </a>
+          </div>
+          <a class="menu-card__more-link" href="./foodmanufacturing-menu.html">
+            <span data-i18n="sectorDetails">分野ガイド・学習モード</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <article class="menu-card" data-sector="lodging">
+          <div class="menu-card__top">
+            <div class="menu-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"></path>
+                <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
+                <path d="M9 7h1"></path>
+                <path d="M14 7h1"></path>
+                <path d="M9 11h1"></path>
+                <path d="M14 11h1"></path>
+                <path d="M9 15h1"></path>
+                <path d="M14 15h1"></path>
+                <path d="M10 21v-3h4v3"></path>
+              </svg>
+            </div>
+            <span class="menu-card__code" data-sector-code="lodging">分野 05</span>
+          </div>
+          <h2 data-sector-name="lodging">宿泊</h2>
+          <p class="menu-card__desc" data-sector-desc="lodging">フロント業務・接客マナー・客室管理・施設安全</p>
+          <div class="menu-card__badge" data-i18n-count="lodging">全290問 · 重要語彙1,000語</div>
+          <div class="sector-actions">
+            <a class="primary-button" href="./lodging.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <span data-i18n="start">練習問題</span>
+            </a>
+            <a class="secondary-button" href="./lodging-vocab.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span data-i18n="vocabulary">重要語彙</span>
+            </a>
+          </div>
+          <a class="menu-card__more-link" href="./lodging-menu.html">
+            <span data-i18n="sectorDetails">分野ガイド・学習モード</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <article class="menu-card" data-sector="automobile">
+          <div class="menu-card__top">
+            <div class="menu-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+            </div>
+            <span class="menu-card__code" data-sector-code="automobile">分野 06</span>
+          </div>
+          <h2 data-sector-name="automobile">自動車整備</h2>
+          <p class="menu-card__desc" data-sector-desc="automobile">日常点検・定期点検・分解整備・故障診断・安全作業</p>
+          <div class="menu-card__badge" data-i18n-count="automobile">全290問 · 重要語彙1,000語</div>
+          <div class="sector-actions">
+            <a class="primary-button" href="./automobile.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+              <span data-i18n="start">練習問題</span>
+            </a>
+            <a class="secondary-button" href="./automobile-vocab.html">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <span data-i18n="vocabulary">重要語彙</span>
+            </a>
+          </div>
+          <a class="menu-card__more-link" href="./automobile-menu.html">
+            <span data-i18n="sectorDetails">分野ガイド・学習モード</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="quizScreen" class="screen hidden">
+      <section class="card quiz-card" id="quizCard">
+        <div class="quiz-header">
+          <div>
+            <p class="small-label" id="questionLabel">問題</p>
+            <p class="question-count" id="questionCount">1/3</p>
+          </div>
+          <div class="category-badge" id="categoryBadge">建設</div>
+        </div>
+
+        <div class="progress" id="progress" aria-label="進捗">
+          <div class="progress__bar" id="progressBar"></div>
+        </div>
+
+        <h2 class="question-text" id="questionText"></h2>
+        <div class="answers" id="answers"></div>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+
+        <div class="quiz-actions">
+          <button class="secondary-button" id="backToMenuButton" type="button">戻る</button>
+          <a class="secondary-button" id="vocabularyButton" href="./construction-vocab.html">重要語彙</a>
+          <button class="primary-button" id="nextButton" type="button" disabled>次へ</button>
+        </div>
+      </section>
+
+      <section class="card result-card hidden" id="resultCard">
+        <p class="small-label" id="resultLabel">結果</p>
+        <h2 id="resultHeading">お疲れさまでした</h2>
+        <div class="score-circle">
+          <span id="scoreText">0/3</span>
+        </div>
+        <p class="accuracy" id="accuracyText">正解率 0%</p>
+        <p class="result-message" id="resultMessage"></p>
+        <div class="quiz-actions result-actions">
+          <button class="secondary-button" id="menuFromResultButton" type="button">戻る</button>
+          <a class="secondary-button" id="resultVocabularyButton" href="./construction-vocab.html">重要語彙</a>
+          <button class="primary-button" id="restartButton" type="button">もう一度挑戦</button>
+        </div>
+      </section>
+    </section>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p class="site-footer__disclaimer" id="footerDisclaimer">特定技能練習問題 — 公表されている試験基準・出題範囲に基づく自主学習サイト（非公式）</p>
+        <a class="site-footer__link" href="./mistakes.html" id="footerMistakesLink">間違いノート ›</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="./mistake-notebook.js"></script>
+  <script src="./firebase-bootstrap.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="script.js?v=20261116-1"></script>
+</body>
+</html>

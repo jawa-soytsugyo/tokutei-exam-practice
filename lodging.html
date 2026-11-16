@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>宿泊業 — 練習問題</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#1F4E79">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="practice.css?v=20261116-1">
+  <link rel="stylesheet" href="./theme.css?v=20261116-2">
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-field="lodging" data-sector="lodging">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="back" class="back" href="./index.html">戻る</a>
+      <div class="controls">
+        <a class="back notebook-link" href="./mistakes.html">間違いノート</a>
+        <select id="language" aria-label="言語">
+          <option value="uz">O'zbek</option>
+          <option value="ja" selected>日本語</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="theme" class="control" type="button" aria-label="夜間表示"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <span id="practice" class="label eyebrow">練習問題</span>
+    <h1 id="title">宿泊業</h1>
+    <p id="progress" class="progress">読み込み中</p>
+    <section class="card">
+      <p id="question" class="question">問題を読み込んでいます。</p>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="next" class="next hidden" type="button"></button>
+    </section>
+  </main>
+  <script src="./firebase-bootstrap.js?v=20261116-1"></script>
+  <script src="./mistake-notebook.js"></script>
+  <script src="./sector-question-generator.js?v=20261116-1"></script>
+  <script src="./lodging-question-data.js?v=20260816-1"></script>
+  <script src="./lodging-vocabulary-1000.js"></script>
+  <script src="./japanese-furigana.js?v=20261116-1"></script>
+  <script src="./practice.js?v=20261116-2"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

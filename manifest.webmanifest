@@ -1,0 +1,32 @@
+{
+  "name": "特定技能試験練習 — Tokutei Ginou Practice",
+  "short_name": "特定技能",
+  "description": "特定技能評価試験（農業・自動車整備・建設・飲食料品製造業・外食業・宿泊）の練習問題・多言語単語帳",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F5F1E8",
+  "theme_color": "#1F4E79",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

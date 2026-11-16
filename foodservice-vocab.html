@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>外食業分野の語彙</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vocabulary.css?v=20261116-1" />
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-sector="foodservice">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="back" class="back" href="./index.html">戻る</a>
+      <div class="controls">
+        <a id="notebookLink" class="back notebook-link" href="./mistakes.html">間違いノート</a>
+        <select id="language" aria-label="言語">
+          <option value="ja">日本語</option>
+          <option value="uz">O'zbek</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="theme" class="theme control" type="button" aria-label="夜間表示"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <span id="eyebrow" class="eyebrow">特定技能 · 外食業</span>
+      <h1 id="title">外食業分野の語彙</h1>
+      <p id="lead" class="lead">飲食店や厨房で使う大切な日本語を復習しましょう。</p>
+    </section>
+    <section class="filters" aria-label="語彙の絞り込み">
+      <label class="filter" for="search">
+        <span id="searchLabel">検索</span>
+        <input id="search" type="search" autocomplete="off" />
+      </label>
+      <label class="filter" for="category">
+        <span id="categoryLabel">項目</span>
+        <select id="category"></select>
+      </label>
+    </section>
+    <div class="tools">
+      <div class="tools-left">
+        <h2 id="listTitle">基本用語</h2>
+        <span id="count" class="count" aria-live="polite"></span>
+      </div>
+      <div class="view-switch" role="tablist" aria-label="表示モード">
+        <button id="viewListBtn" class="view-btn is-active" type="button" aria-selected="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span id="viewListLabel">一覧</span>
+        </button>
+        <button id="viewFlashcardBtn" class="view-btn" type="button" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="viewFlashcardLabel">単語カード (Flashcard)</span>
+        </button>
+      </div>
+    </div>
+    <section id="flashcardArea" class="flashcard-area is-hidden" aria-label="単語カード">
+      <div class="fc-header">
+        <span id="fcCategory" class="fc-category-badge"></span>
+        <span id="fcCount" class="fc-counter">1 / 1000</span>
+      </div>
+      <div id="fcCard" class="fc-card" tabindex="0" role="button" aria-label="タップして意味を表示">
+        <div class="fc-card-inner">
+          <div class="fc-face fc-front">
+            <span class="fc-badge-hint" id="fcHintLabel">👆 タップで意味を表示</span>
+            <p id="fcTerm" class="fc-term"></p>
+            <p id="fcFrontReading" class="fc-reading-sub"></p>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="fc-back-category" id="fcBackCategory"></span>
+            <p id="fcMeaning" class="fc-meaning"></p>
+            <p id="fcReading" class="fc-reading"></p>
+            <p id="fcNote" class="fc-note"></p>
+          </div>
+        </div>
+      </div>
+      <div class="fc-controls">
+        <button id="fcPrev" class="fc-btn fc-nav" type="button">⬅️ 前へ</button>
+        <button id="fcFlip" class="fc-btn fc-flip" type="button">🔄 めくる</button>
+        <button id="fcNext" class="fc-btn fc-nav" type="button">次へ ➡️</button>
+      </div>
+      <div class="fc-actions">
+        <button id="fcMistake" class="fc-action-btn fc-mistake" type="button">❌ 覚えていない</button>
+        <button id="fcKnown" class="fc-action-btn fc-known" type="button">✅ 覚えた！</button>
+      </div>
+    </section>
+    <section id="vocabulary" class="vocabulary" aria-labelledby="listTitle">
+      <article class="word"><p class="word__term"><ruby>飲食店<rt>いんしょくてん</rt></ruby></p><p class="word__meaning" data-uz="Ovqatlanish muassasasi" data-ja="食事や飲み物を提供する店" data-en="Restaurant / food-service establishment" data-ne="खाना र पेय पदार्थ उपलब्ध गराउने पसल">Ovqatlanish muassasasi</p><p class="word__note" data-uz="Restoran, kafe va boshqa ovqatlanish joylari." data-ja="レストランやカフェなどが含まれます。" data-en="Includes restaurants, cafés, and similar venues." data-ne="रेस्टुरेन्ट, क्याफे र यस्तै स्थानहरू पर्छन्।">Restoran, kafe va boshqa ovqatlanish joylari.</p></article>
+      <article class="word"><p class="word__term"><ruby>接客<rt>せっきゃく</rt></ruby></p><p class="word__meaning" data-uz="Mijozlarga xizmat ko'rsatish" data-ja="お客様に対応すること" data-en="Customer service" data-ne="ग्राहक सेवा">Mijozlarga xizmat ko'rsatish</p><p class="word__note" data-uz="Mijozni xushmuomalalik bilan kutib olish va yordam berish." data-ja="お客様を丁寧に迎え、対応することです。" data-en="Welcoming and helping customers politely." data-ne="ग्राहकलाई विनम्रतापूर्वक स्वागत र सहयोग गर्ने काम।">Mijozni xushmuomalalik bilan kutib olish va yordam berish.</p></article>
+      <article class="word"><p class="word__term"><ruby>注文<rt>ちゅうもん</rt></ruby></p><p class="word__meaning" data-uz="Buyurtma" data-ja="料理や飲み物を頼むこと" data-en="Order" data-ne="अर्डर">Buyurtma</p><p class="word__note" data-uz="Mijoz taom yoki ichimlikni tanlab so'raydi." data-ja="お客様が料理や飲み物を選んで頼みます。" data-en="A customer chooses and requests food or drinks." data-ne="ग्राहकले खाना वा पेय छानेर माग गर्छ।">Mijoz taom yoki ichimlikni tanlab so'raydi.</p></article>
+      <article class="word"><p class="word__term"><ruby>調理<rt>ちょうり</rt></ruby></p><p class="word__meaning" data-uz="Taom tayyorlash" data-ja="食材を料理にすること" data-en="Cooking" data-ne="खाना पकाउने">Taom tayyorlash</p><p class="word__note" data-uz="Masalliqlardan taom tayyorlash jarayoni." data-ja="食材を使って料理を作る作業です。" data-en="The work of preparing dishes from ingredients." data-ne="सामग्रीबाट परिकार तयार गर्ने काम।">Masalliqlardan taom tayyorlash jarayoni.</p></article>
+      <article class="word"><p class="word__term"><ruby>衛生<rt>えいせい</rt></ruby></p><p class="word__meaning" data-uz="Gigiyena" data-ja="清潔で健康を守ること" data-en="Hygiene" data-ne="सरसफाइ तथा स्वच्छता">Gigiyena</p><p class="word__note" data-uz="Qo'llar, jihozlar va ish joyini toza saqlash muhim." data-ja="手、道具、作業場所を清潔に保つことが大切です。" data-en="Keeping hands, equipment, and the work area clean is essential." data-ne="हात, उपकरण र कार्यस्थल सफा राख्नु महत्त्वपूर्ण छ।">Qo'llar, jihozlar va ish joyini toza saqlash muhim.</p></article>
+      <article class="word"><p class="word__term"><ruby>配膳<rt>はいぜん</rt></ruby></p><p class="word__meaning" data-uz="Taomni dasturxonga tortish" data-ja="料理や食器をお客様の席に運ぶこと" data-en="Serving food" data-ne="खाना परोस्ने काम">Taomni dasturxonga tortish</p><p class="word__note" data-uz="Tayyor taomni mijoz stoliga ehtiyotkorlik bilan olib borish." data-ja="できあがった料理をお客様の席まで運びます。" data-en="Carefully carry prepared dishes to the customer's table." data-ne="तयार खाना सावधानीपूर्वक ग्राहकको टेबलमा पुर्‍याइन्छ।">Tayyor taomni mijoz stoliga ehtiyotkorlik bilan olib borish.</p></article>
+      <article class="word"><p class="word__term"><ruby>会計<rt>かいけい</rt></ruby></p><p class="word__meaning" data-uz="Hisob-kitob, to'lov" data-ja="料金を計算して支払いを受けること" data-en="Billing / payment" data-ne="बिल तथा भुक्तानी">Hisob-kitob, to'lov</p><p class="word__note" data-uz="Mijozning buyurtmasi uchun to'lovni qabul qilish." data-ja="お客様の注文に対する料金を受け取ります。" data-en="Receive payment for the customer's order." data-ne="ग्राहकको अर्डरको भुक्तानी लिने काम।">Mijozning buyurtmasi uchun to'lovni qabul qilish.</p></article>
+      <article class="word"><p class="word__term"><ruby>予約<rt>よやく</rt></ruby></p><p class="word__meaning" data-uz="Oldindan band qilish" data-ja="前もって席や時間を確保すること" data-en="Reservation" data-ne="अग्रिम बुकिङ">Oldindan band qilish</p><p class="word__note" data-uz="Mijoz oldindan stol yoki vaqtni belgilab qo'yadi." data-ja="お客様が前もって席や時間を決めます。" data-en="A customer secures a table or time in advance." data-ne="ग्राहकले पहिले नै टेबल वा समय बुक गर्छ।">Mijoz oldindan stol yoki vaqtni belgilab qo'yadi.</p></article>
+      <article class="word"><p class="word__term"><ruby>清掃<rt>せいそう</rt></ruby></p><p class="word__meaning" data-uz="Tozalash" data-ja="店内や厨房をきれいにすること" data-en="Cleaning" data-ne="सफाइ">Tozalash</p><p class="word__note" data-uz="Oshxona va zalni doim toza tuting." data-ja="厨房や店内をいつもきれいに保ちます。" data-en="Keep the kitchen and dining area clean at all times." data-ne="भान्सा र भोजन क्षेत्र सधैं सफा राख्नुहोस्।">Oshxona va zalni doim toza tuting.</p></article>
+      <article class="word"><p class="word__term"><ruby>食物<rt>しょくもつ</rt></ruby>アレルギー</p><p class="word__meaning" data-uz="Oziq-ovqat allergiyasi" data-ja="食べ物によって体に症状が出ること" data-en="Food allergy" data-ne="खाद्य एलर्जी">Oziq-ovqat allergiyasi</p><p class="word__note" data-uz="Buyurtma olayotganda allergiyani albatta tekshiring." data-ja="注文を受けるときは、アレルギーを必ず確認します。" data-en="Always check for allergies when taking an order." data-ne="अर्डर लिँदा एलर्जीबारे अनिवार्य रूपमा जाँच गर्नुहोस्।">Buyurtma olayotganda allergiyani albatta tekshiring.</p></article>
+    </section>
+    <nav class="pager" aria-label="ページ移動">
+      <button id="previous" type="button">前へ</button>
+      <span id="pageStatus" class="page-status"></span>
+      <button id="next" type="button">次へ</button>
+    </nav>
+  </main>
+  <script>
+    const labels = {
+      uz: {
+        eyebrow: 'Tokutei Ginou · Ovqatlanish xizmati',
+        title: "Ovqatlanish xizmati lug'ati",
+        lead: "Restoran va oshxona ishlarida ishlatiladigan muhim yaponcha so'zlarni takrorlang.",
+        list: 'Asosiy atamalar',
+        back: 'Ortga',
+        notebook: 'Xatolar daftarim'
+      },
+      ja: {
+        eyebrow: '特定技能 · 外食業',
+        title: '外食業分野の語彙',
+        lead: '飲食店や厨房で使う大切な日本語を復習しましょう。',
+        list: '基本用語',
+        back: '戻る',
+        notebook: '間違いノート'
+      },
+      en: {
+        eyebrow: 'Specified Skilled Worker · Food Service',
+        title: 'Food service vocabulary',
+        lead: 'Review essential Japanese terms used in restaurants and kitchens.',
+        list: 'Key terms',
+        back: 'Back',
+        notebook: 'My mistakes'
+      },
+      ne: {
+        eyebrow: 'विशिष्ट दक्ष कामदार · खानपान सेवा',
+        title: 'खानपान सेवा शब्दावली',
+        lead: 'रेस्टुरेन्ट र भान्सामा प्रयोग हुने महत्त्वपूर्ण जापानी शब्दहरू दोहोर्याउनुहोस्।',
+        list: 'मुख्य शब्दहरू',
+        back: 'फर्कनुहोस्',
+        notebook: 'गल्तीहरूको नोटबुक'
+      },
+      my: {
+        eyebrow: 'သတ်မှတ်ကျွမ်းကျင်လုပ်သား · အစားအသောက်ဝန်ဆောင်မှု',
+        title: 'အစားအသောက်ဝန်ဆောင်မှု ဝေါဟာရ',
+        lead: 'စားသောက်ဆိုင်နှင့် မီးဖိုချောင်တွင် အသုံးပြုသည့် အရေးကြီးသော ဂျပန်ဝေါဟာရများကို ပြန်လည်လေ့လာပါ။',
+        list: 'အဓိက ဝေါဟာရများ',
+        back: 'နောက်သို့',
+        notebook: 'အမှားမှတ်စု'
+      }
+    };
+    window.__VOCAB_PAGE_LABELS__ = labels;
+
+    function applyVocabLocale(lang) {
+      const activeLang = labels[lang] ? lang : 'ja';
+      const current = labels[activeLang] || labels.ja;
+      document.documentElement.lang = activeLang;
+      document.title = current.title;
+      const elEyebrow = document.getElementById('eyebrow');
+      if (elEyebrow) elEyebrow.textContent = current.eyebrow;
+      const elTitle = document.getElementById('title');
+      if (elTitle) elTitle.textContent = current.title;
+      const elLead = document.getElementById('lead');
+      if (elLead) elLead.textContent = current.lead;
+      const elList = document.getElementById('listTitle');
+      if (elList) elList.textContent = current.list;
+      const elBack = document.getElementById('back');
+      if (elBack) elBack.textContent = current.back;
+      const elNotebook = document.getElementById('notebookLink');
+      if (elNotebook) elNotebook.textContent = current.notebook;
+      document.querySelectorAll('[data-uz]').forEach((item) => {
+        item.textContent = item.dataset[activeLang] ?? item.dataset.ja ?? item.dataset.en ?? '';
+      });
+      const langSelect = document.getElementById('language');
+      if (langSelect && langSelect.value !== activeLang) {
+        langSelect.value = activeLang;
+      }
+    }
+
+    const language = localStorage.getItem('language') || 'ja';
+    applyVocabLocale(language);
+
+    const langSelect = document.getElementById('language');
+    if (langSelect) {
+      langSelect.value = labels[language] ? language : 'ja';
+      langSelect.addEventListener('change', (e) => {
+        const nextLang = labels[e.target.value] ? e.target.value : 'ja';
+        localStorage.setItem('language', nextLang);
+        applyVocabLocale(nextLang);
+      });
+    }
+
+    window.ThemeManager?.updateUI();
+  </script>
+  <script src="./mistake-notebook.js"></script>
+  <script src="./sector-vocabulary-reviewed.js"></script>
+  <script src="./foodservice-vocabulary-1000.js"></script>
+  <script src="./vocabulary-page.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

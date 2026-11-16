@@ -1,0 +1,2862 @@
+/*
+ * theme.css — Eye-Friendly Japanese Study Notebook Design System
+ * Warm washi paper palette, physical 3D key buttons, crisp monochrome stroke SVGs.
+ * Universal design for Tokutei Skill practice across all 20 pages.
+ */
+
+/* ============================================================
+   1. PALETTE & DESIGN TOKENS
+   ============================================================ */
+
+/* Light Mode: Warm Washi Paper (#F5F1E8) & Indigo Ink (#1F4E79) */
+:root,
+html,
+html body {
+  /* Surfaces */
+  --bg: #F5F1E8;
+  --card: #FFFFFF;
+  --surface: #FFFFFF;
+  --panel: #FFFFFF;
+  --surface-soft: #EFEADF;
+  --panel-soft: #EFEADF;
+
+  /* Typography */
+  --text: #1F2933;
+  --text-secondary: #3E4C59;
+  --muted: #66717D;
+
+  /* Lines & Borders */
+  --line: #DDD5C6;
+  --border: #DDD5C6;
+  --line-strong: #B9AE9A;
+  --line-focus: #1F4E79;
+
+  /* Primary Action: Indigo Ink (藍色) */
+  --primary: #1F4E79;
+  --primary-hover: #173D60;
+  --primary-press: #102C46;
+  --primary-text: #FFFFFF;
+  --accent: #1F4E79;
+  --accent-strong: #102C46;
+  --accent-soft: #E6EEF6;
+
+  /* Accent Vermilion (朱色) */
+  --accent-red: #C0392B;
+
+  /* Status Colors */
+  --good: #2E7D4F;
+  --good-soft: #E7F3EC;
+  --good-border: #A3D4B6;
+  --danger: #B3261E;
+  --danger-soft: #FBEAE8;
+  --danger-border: #F3B8B4;
+
+  /* Sector Defaults */
+  --sector: #1F4E79;
+  --sector-soft: rgba(31, 78, 121, 0.12);
+
+  /* Elevation & Geometry */
+  --shadow: 0 1px 0 rgba(31, 41, 51, 0.06);
+  --shadow-hover: 0 2px 4px rgba(31, 41, 51, 0.08);
+  --radius: 14px;
+  --radius-button: 10px;
+  --radius-input: 10px;
+
+  /* Font Stack */
+  --font-base: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+  font-family: var(--font-base);
+  background: var(--bg) !important;
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dark Mode: Restful Deep Midnight Slate (#15191F) */
+html.dark,
+html.dark body,
+html body.dark,
+body.dark {
+  --bg: #15191F;
+  --card: #1D232B;
+  --surface: #1D232B;
+  --panel: #1D232B;
+  --surface-soft: #252C36;
+  --panel-soft: #252C36;
+
+  --text: #ECE7DE;
+  --text-secondary: #C9C2B6;
+  --muted: #9AA3AD;
+
+  --line: #313A46;
+  --border: #313A46;
+  --line-strong: #4A5563;
+  --line-focus: #5B8FC7;
+
+  --primary: #5B8FC7;
+  --primary-hover: #74A3D6;
+  --primary-press: #2F5F92;
+  --primary-text: #0E1620;
+  --accent: #5B8FC7;
+  --accent-strong: #74A3D6;
+  --accent-soft: rgba(91, 143, 199, 0.16);
+
+  --accent-red: #E0705F;
+
+  --good: #5DBB84;
+  --good-soft: rgba(93, 187, 132, 0.15);
+  --good-border: rgba(93, 187, 132, 0.35);
+
+  --danger: #EF7A70;
+  --danger-soft: rgba(239, 122, 112, 0.15);
+  --danger-border: rgba(239, 122, 112, 0.35);
+
+  --sector: #5B8FC7;
+  --sector-soft: rgba(91, 143, 199, 0.16);
+
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.35);
+
+  background: var(--bg) !important;
+}
+
+/* ============================================================
+   2. SECTOR COLORS (LIGHT & DARK)
+   ============================================================ */
+
+/* Light Mode Sector Palette */
+[data-sector="construction"], [data-field="construction"], body.sector-construction {
+  --sector: #B5541C;
+  --sector-soft: rgba(181, 84, 28, 0.12);
+}
+[data-sector="agriculture"], [data-field="agriculture"], body.sector-agriculture {
+  --sector: #3E7B3A;
+  --sector-soft: rgba(62, 123, 58, 0.12);
+}
+[data-sector="foodservice"], [data-field="foodservice"], body.sector-foodservice {
+  --sector: #B23A48;
+  --sector-soft: rgba(178, 58, 72, 0.12);
+}
+[data-sector="foodmanufacturing"], [data-field="foodmanufacturing"], body.sector-foodmanufacturing {
+  --sector: #8A6A2F;
+  --sector-soft: rgba(138, 106, 47, 0.12);
+}
+[data-sector="lodging"], [data-field="lodging"], body.sector-lodging {
+  --sector: #2E6E8E;
+  --sector-soft: rgba(46, 110, 142, 0.12);
+}
+[data-sector="automobile"], [data-field="automobile"], body.sector-automobile {
+  --sector: #4C5594;
+  --sector-soft: rgba(76, 85, 148, 0.12);
+}
+
+/* Dark Mode Sector Palette (+15% luminance) */
+html.dark [data-sector="construction"], html.dark [data-field="construction"], html.dark body.sector-construction,
+body.dark [data-sector="construction"], body.dark [data-field="construction"], body.dark.sector-construction {
+  --sector: #D67035;
+  --sector-soft: rgba(214, 112, 53, 0.16);
+}
+html.dark [data-sector="agriculture"], html.dark [data-field="agriculture"], html.dark body.sector-agriculture,
+body.dark [data-sector="agriculture"], body.dark [data-field="agriculture"], body.dark.sector-agriculture {
+  --sector: #5C9D58;
+  --sector-soft: rgba(92, 157, 88, 0.16);
+}
+html.dark [data-sector="foodservice"], html.dark [data-field="foodservice"], html.dark body.sector-foodservice,
+body.dark [data-sector="foodservice"], body.dark [data-field="foodservice"], body.dark.sector-foodservice {
+  --sector: #D25463;
+  --sector-soft: rgba(210, 84, 99, 0.16);
+}
+html.dark [data-sector="foodmanufacturing"], html.dark [data-field="foodmanufacturing"], html.dark body.sector-foodmanufacturing,
+body.dark [data-sector="foodmanufacturing"], body.dark [data-field="foodmanufacturing"], body.dark.sector-foodmanufacturing {
+  --sector: #AC8A4B;
+  --sector-soft: rgba(172, 138, 75, 0.16);
+}
+html.dark [data-sector="lodging"], html.dark [data-field="lodging"], html.dark body.sector-lodging,
+body.dark [data-sector="lodging"], body.dark [data-field="lodging"], body.dark.sector-lodging {
+  --sector: #4C8EAE;
+  --sector-soft: rgba(76, 142, 174, 0.16);
+}
+html.dark [data-sector="automobile"], html.dark [data-field="automobile"], html.dark body.sector-automobile,
+body.dark [data-sector="automobile"], body.dark [data-field="automobile"], body.dark.sector-automobile {
+  --sector: #6C76B6;
+  --sector-soft: rgba(108, 118, 182, 0.16);
+}
+
+/* ============================================================
+   3. UNIVERSAL RESET & ACCESSIBILITY
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html body ::selection {
+  background: rgba(31, 78, 121, 0.22);
+}
+
+html.dark body ::selection {
+  background: rgba(91, 143, 199, 0.28);
+}
+
+/* High visibility focus ring */
+html body a:focus-visible,
+html body button:focus-visible,
+html body select:focus-visible,
+html body input:focus-visible,
+html body summary:focus-visible {
+  outline: 3px solid var(--accent-red) !important;
+  outline-offset: 3px !important;
+}
+
+/* Ruby Furigana Typography */
+ruby {
+  ruby-position: over;
+}
+rt {
+  color: var(--muted);
+  font-size: 0.52em;
+  font-weight: 500;
+  user-select: none;
+}
+
+/* ============================================================
+   4. BUTTONS & INTERACTIVE CONTROLS
+   ============================================================ */
+
+/* Primary Button (Physical 3D Key look) */
+html body .primary-button,
+html body .next,
+html body .action-primary {
+  min-height: 52px;
+  padding: 0 22px;
+  background: var(--primary) !important;
+  color: var(--primary-text) !important;
+  border: 2px solid var(--primary-press) !important;
+  border-radius: var(--radius-button);
+  box-shadow: 0 3px 0 var(--primary-press) !important;
+  font-size: 17px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease, transform 80ms ease, box-shadow 80ms ease;
+  line-height: 1;
+}
+
+html body .primary-button:hover:not(:disabled),
+html body .next:hover:not(:disabled) {
+  background: var(--primary-hover) !important;
+  filter: none;
+}
+
+html body .primary-button:active:not(:disabled),
+html body .next:active:not(:disabled) {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 var(--primary-press) !important;
+}
+
+html body .primary-button:disabled,
+html body .next:disabled {
+  opacity: 0.45;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Secondary Button (Physical 3D Key look) */
+html body .secondary-button,
+html body .back-button,
+html body .pager button {
+  min-height: 52px;
+  padding: 0 20px;
+  background: var(--card) !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: var(--radius-button);
+  box-shadow: 0 3px 0 var(--line-strong) !important;
+  font-size: 17px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease, transform 80ms ease, box-shadow 80ms ease;
+  line-height: 1;
+}
+
+html body .secondary-button:hover:not(:disabled),
+html body .back-button:hover:not(:disabled),
+html body .pager button:hover:not(:disabled) {
+  background: var(--accent-soft) !important;
+  color: var(--primary) !important;
+}
+
+html body .secondary-button:active:not(:disabled),
+html body .back-button:active:not(:disabled),
+html body .pager button:active:not(:disabled) {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 var(--line-strong) !important;
+}
+
+html body .secondary-button:disabled,
+html body .back-button:disabled,
+html body .pager button:disabled {
+  opacity: 0.45;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Understated Text Links (e.g. 分野ガイド) */
+html body .menu-card__more-link,
+html body .site-footer__link,
+html body .text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 6px 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--line-strong);
+  transition: color 120ms ease, text-decoration-color 120ms ease;
+}
+
+html body .menu-card__more-link:hover,
+html body .site-footer__link:hover,
+html body .text-link:hover {
+  color: var(--primary);
+  text-decoration-color: var(--primary);
+}
+
+/* ============================================================
+   5. TOPBAR & HEADER CONTROLS (ALL PAGES)
+   ============================================================ */
+
+html body .topbar {
+  background: var(--card) !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 10px max(16px, calc((100% - 1120px) / 2)) !important;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+html body .topbar-inner {
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+html body .brand-lockup,
+html body .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  text-decoration: none;
+}
+
+html body .brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+}
+
+html body .brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+html body .brand-name,
+html body .brand-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+html body .brand-sub,
+html body .brand-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+html body .controls,
+html body .settings {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Header Back Link (in practice/vocab/menu topbars) */
+html body .back,
+html body .topbar .back-button {
+  min-height: 44px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button);
+  background: var(--card) !important;
+  color: var(--text) !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+  white-space: nowrap;
+}
+
+html body .back:hover,
+html body .topbar .back-button:hover {
+  background: var(--surface-soft) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Notebook Header Link */
+html body .notebook-link {
+  min-height: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button);
+  background: var(--card) !important;
+  color: var(--text) !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease;
+  white-space: nowrap;
+}
+
+html body .notebook-link:hover {
+  background: var(--surface-soft) !important;
+  border-color: var(--primary) !important;
+}
+
+html body .count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--accent-red);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 20px;
+  line-height: 1.2;
+}
+
+/* Header Selects (Language) */
+html body .controls select,
+html body .settings select,
+html body select#languageSelect,
+html body select#language,
+html body select#langSelect {
+  min-height: 44px !important;
+  padding: 0 34px 0 14px !important;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button) !important;
+  background-color: var(--card) !important;
+  color: var(--text) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233E4C59' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 14px !important;
+  box-shadow: none !important;
+}
+
+html.dark body .controls select,
+html.dark body .settings select,
+html.dark body select#languageSelect,
+html.dark body select#language,
+html.dark body select#langSelect,
+body.dark .controls select,
+body.dark .settings select,
+body.dark select#languageSelect,
+body.dark select#language,
+body.dark select#langSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9C2B6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+/* Theme Toggle Button */
+html body .control,
+html body .theme,
+html body .theme-toggle {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button);
+  background: var(--card) !important;
+  color: var(--text) !important;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+html body .control:hover,
+html body .theme:hover,
+html body .theme-toggle:hover {
+  background: var(--surface-soft) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Menu Font Size Control Group & Header Controls */
+html body .settings .control-group {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+  gap: 6px !important;
+}
+
+/* Only the font size control-group gets a grouped border */
+html body .control-group,
+html body .settings .control-group[aria-label*="Font"],
+html body .settings .control-group:has(.font-button:not(.theme-toggle)) {
+  display: inline-flex !important;
+  align-items: center !important;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button) !important;
+  background: var(--card) !important;
+  min-height: 44px !important;
+  padding: 0 4px !important;
+}
+
+/* Flatten control groups that wrap select or themeToggle */
+html body .settings .control-group:has(select),
+html body .settings .control-group:has(#themeToggle),
+html body .settings .control-group:has(.theme-toggle) {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+html body .settings #themeToggle,
+html body .settings .theme-toggle {
+  min-height: 44px !important;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button) !important;
+  background-color: var(--card) !important;
+  color: var(--text) !important;
+}
+
+html body .font-button {
+  min-height: 36px;
+  min-width: 36px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+html body .font-button:hover {
+  background: var(--surface-soft);
+}
+
+/* Global Settings Button (sliders icon button) */
+html body #globalSettingsButton,
+html body .global-settings-button,
+html body .global-settings-button.is-inline {
+  min-height: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  width: 44px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-button) !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: all 120ms ease !important;
+}
+
+html body #globalSettingsButton:hover,
+html body .global-settings-button:hover {
+  background: var(--surface-soft) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+html body #globalSettingsButton:focus-visible,
+html body .global-settings-button:focus-visible {
+  outline: 3px solid var(--accent-red) !important;
+  outline-offset: 3px !important;
+}
+
+html.dark body #globalSettingsButton,
+body.dark #globalSettingsButton,
+html.dark body .global-settings-button,
+body.dark .global-settings-button {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border-color: var(--line-strong) !important;
+}
+
+/* ============================================================
+   6. INDEX PORTAL (HERO, FACTS ROW, GUIDE STRIP, SECTOR GRID)
+   ============================================================ */
+
+/* Left-aligned, quiet hero without box */
+html body .hero:not(:has(.hero-panel)) {
+  max-width: 1120px;
+  margin: 0 auto 28px;
+  padding: 28px 0 0;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  text-align: left;
+}
+
+html body .hero__label {
+  display: inline-block;
+  border-left: 3px solid var(--accent-red);
+  padding: 2px 0 2px 10px;
+  border-radius: 0;
+  background: none !important;
+  color: var(--accent-red);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+html body .hero h1,
+html body h1#appTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px;
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+
+html body .hero__subtitle {
+  max-width: 780px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+}
+
+/* Inline Facts Row (6分野 ・ 12,480問 ・ 6,000語) */
+html body .portal-stats {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: baseline !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  margin-top: 14px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+html body .portal-stat {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  font-size: 15px !important;
+  color: var(--text-secondary) !important;
+  line-height: 1 !important;
+}
+
+html body .portal-stat strong {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  font-variant-numeric: tabular-nums !important;
+  line-height: 1 !important;
+}
+
+html body .portal-stat span {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: var(--muted) !important;
+  line-height: 1 !important;
+}
+
+html body .portal-stat__sep {
+  color: var(--line-strong) !important;
+  margin: 0 4px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+/* 3-Step Strip (使い方) */
+html body .guide-steps {
+  max-width: 1120px;
+  margin: 22px auto 36px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+html body .guide-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+html body .guide-step__num {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+html body .guide-step__text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* Section Heading Row */
+html body .section-heading-row {
+  max-width: 1120px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+html body .section-heading {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Sector Grid (3 cols desktop, 2 cols tablet, 1 col mobile) */
+html body .menu-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 1023px) {
+  html body .menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  html body .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  html body .guide-steps {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  html body .hero h1,
+  html body h1#appTitle {
+    font-size: 24px;
+  }
+}
+
+/* Sector Card */
+html body .menu-card {
+  position: relative;
+  overflow: visible;
+  padding: 22px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--sector);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: border-color 140ms ease;
+}
+
+html body .menu-card:hover {
+  transform: none;
+  border-color: var(--line-strong);
+  border-left-color: var(--sector);
+  box-shadow: var(--shadow-hover);
+}
+
+html body .menu-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+html body .menu-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--sector-soft);
+  color: var(--sector);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+html body .menu-card__code {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+html body .menu-card h2,
+html body .menu-card__title {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: normal;
+}
+
+html body .menu-card__desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  flex: 1;
+  margin: 0;
+}
+
+html body .menu-card__badge {
+  font-size: 13px !important;
+  color: var(--muted) !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 6px !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  width: auto !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Two distinct, physical key buttons per card: one line side-by-side */
+html body .menu-card .sector-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+}
+
+html body .menu-card .sector-actions .primary-button,
+html body .menu-card .sector-actions .secondary-button {
+  white-space: nowrap !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  padding: 0 10px !important;
+  gap: 6px !important;
+  font-size: 14.5px !important;
+}
+
+html body .menu-card .sector-actions .primary-button svg,
+html body .menu-card .sector-actions .secondary-button svg,
+html body .sector-actions svg {
+  flex: 0 0 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+@media (max-width: 639px) {
+  html body .menu-card .sector-actions {
+    flex-direction: column !important;
+  }
+  html body .menu-card .sector-actions .primary-button,
+  html body .menu-card .sector-actions .secondary-button {
+    flex: 1 1 auto !important;
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+html body .site-footer {
+  max-width: 1120px;
+  margin: 48px auto 0;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--line);
+}
+
+html body .site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+html body .site-footer__disclaimer {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   7. SECTOR MENU PAGES (*-menu.html)
+   ============================================================ */
+
+html body main:has(.hero-copy),
+html body main:has(.themes-grid) {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+html body .hero:has(.hero-panel) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 28px;
+  align-items: stretch;
+  margin-bottom: 32px;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+}
+
+/* Hide duplicate in-page back button on *-menu.html */
+html body .back-to-home-row {
+  display: none !important;
+}
+
+html body .eyebrow,
+html body #eyebrow,
+html body .label.eyebrow {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid var(--primary) !important;
+  border-radius: 6px;
+  background: var(--accent-soft) !important;
+  color: var(--primary) !important;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+html body[data-sector] .eyebrow {
+  border: 1px solid var(--sector) !important;
+  background: var(--sector-soft) !important;
+  color: var(--sector) !important;
+}
+
+/* Dark mode contrast guarantees */
+html.dark body .eyebrow,
+body.dark .eyebrow,
+html.dark body #eyebrow,
+body.dark #eyebrow,
+html.dark body .label.eyebrow,
+body.dark .label.eyebrow {
+  border: 1px solid #74A3D6 !important;
+  background: rgba(91, 143, 199, 0.22) !important;
+  color: #93BEEC !important;
+}
+
+html.dark body[data-sector] .eyebrow,
+body.dark[data-sector] .eyebrow {
+  border: 1px solid var(--sector) !important;
+  background: var(--sector-soft) !important;
+  color: var(--sector) !important;
+}
+
+html body h1#pageTitle,
+html body .hero-copy h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+html body .lead {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Sector summary panel */
+html body .hero-panel {
+  position: relative;
+  background: var(--card) !important;
+  border: 1px solid var(--line) !important;
+  border-left: 6px solid var(--sector) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+  color: var(--text) !important;
+  padding: 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 16px;
+}
+
+html body .hero-panel::before {
+  display: none !important;
+}
+
+html body .hero-panel .metric-number {
+  font-size: 44px !important;
+  font-weight: 700 !important;
+  color: var(--sector) !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+html body .hero-panel .metric-label {
+  font-size: 14px !important;
+  color: var(--muted) !important;
+  margin-top: 6px;
+}
+
+/* Mini list in hero-panel: 練習 primary button, 語彙 secondary button */
+html body .hero-panel .mini-list {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+
+html body .hero-panel .mini-item {
+  flex: 1 1 0 !important;
+  min-height: 48px !important;
+  padding: 0 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border-radius: var(--radius-button) !important;
+  cursor: pointer !important;
+  transition: all 120ms ease !important;
+}
+
+/* Practice button (練習) -> primary button look, order 1 */
+html body .hero-panel .mini-item[data-i18n="miniPractice"],
+html body .hero-panel .mini-item:last-child {
+  order: 1 !important;
+  background: var(--primary) !important;
+  color: var(--primary-text) !important;
+  border: 2px solid var(--primary-press) !important;
+  box-shadow: 0 3px 0 var(--primary-press) !important;
+}
+
+html body .hero-panel .mini-item[data-i18n="miniPractice"]:hover,
+html body .hero-panel .mini-item:last-child:hover {
+  background: var(--primary-hover) !important;
+}
+
+html body .hero-panel .mini-item[data-i18n="miniPractice"]:active,
+html body .hero-panel .mini-item:last-child:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 var(--primary-press) !important;
+}
+
+/* Vocabulary button (語彙) -> secondary button look, order 2 */
+html body .hero-panel .mini-item[data-i18n="miniVocabulary"],
+html body .hero-panel .mini-item:first-child {
+  order: 2 !important;
+  background: var(--card) !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  box-shadow: 0 3px 0 var(--line-strong) !important;
+}
+
+html body .hero-panel .mini-item[data-i18n="miniVocabulary"]:hover,
+html body .hero-panel .mini-item:first-child:hover {
+  background: var(--accent-soft) !important;
+  color: var(--primary) !important;
+}
+
+html body .hero-panel .mini-item[data-i18n="miniVocabulary"]:active,
+html body .hero-panel .mini-item:first-child:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 var(--line-strong) !important;
+}
+
+/* Section Head */
+html body .section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 18px 0 16px;
+  flex-wrap: wrap;
+}
+
+html body .section-head h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+html body .section-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Mode Selection Cards (Whole card is the button/link, min-height 88px) */
+html body .themes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 680px) {
+  html body .themes-grid {
+    grid-template-columns: 1fr;
+  }
+  html body .hero:has(.hero-panel) {
+    grid-template-columns: 1fr;
+  }
+}
+
+html body .back-to-home-row {
+  margin-bottom: 20px;
+}
+
+html body .back-to-home-row .secondary-button {
+  min-height: 46px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+html body .theme-card {
+  min-height: 88px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 2px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 3px 0 var(--line-strong);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, transform 80ms ease, box-shadow 80ms ease;
+}
+
+html body .theme-card__main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
+}
+
+html body .theme-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--sector-soft);
+  color: var(--sector);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+html body .theme-card:hover {
+  border-color: var(--primary);
+  background: var(--accent-soft);
+  transform: none;
+  box-shadow: 0 3px 0 var(--line-strong);
+}
+
+html body .theme-card:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--line-strong);
+}
+
+html body .theme-title {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+html body .theme-desc {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+html body .theme-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+html body .arrow {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--primary);
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Mode Selection Cards on mobile: hide "始める" text, keep only chevron box */
+@media (max-width: 639px) {
+  html body .theme-footer [data-i18n="openMode"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  html body .theme-footer {
+    gap: 0 !important;
+  }
+}
+
+/* ============================================================
+   8. PRACTICE SCREEN (QUESTIONS, OPTIONS, EXPLANATION)
+   ============================================================ */
+
+html body main:has(.options),
+html body main:has(.quiz-card) {
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+html body .card {
+  padding: 28px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+html body .practice-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+html body .progress,
+html body .question-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0;
+}
+
+html body .session-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+html body .session-score-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--line);
+}
+
+html body .shuffle-btn {
+  border: 2px solid var(--line-strong);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+html body .shuffle-btn:hover {
+  background: var(--surface-soft);
+  border-color: var(--primary);
+}
+
+/* Clean 8px Progress Bar */
+html body .practice-progress-bar,
+html body .progress:has(.progress__bar) {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  overflow: hidden;
+  margin: 10px 0 22px;
+  border: 1px solid var(--line);
+  padding: 0;
+}
+
+html body .practice-progress-fill,
+html body .progress__bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--primary) !important;
+  transition: width 200ms ease;
+}
+
+/* Question text */
+html body .question,
+html body .question-text {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 24px;
+}
+
+/* Options Container */
+html body .options,
+html body .answers {
+  display: grid;
+  gap: 12px;
+}
+
+/* Restful Option Choice Button (min-height 60px, 2px border) */
+html body .option,
+html body .answer-button {
+  width: 100%;
+  min-height: 60px;
+  padding: 14px 18px;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: 12px;
+  background: var(--card) !important;
+  color: var(--text) !important;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  transition: border-color 120ms ease, background 120ms ease;
+  line-height: 1.5;
+}
+
+html body .option:hover:not(:disabled),
+html body .answer-button:hover:not(:disabled) {
+  border-color: var(--primary) !important;
+  background: var(--accent-soft) !important;
+  transform: none;
+}
+
+html body .option:disabled,
+html body .answer-button:disabled {
+  cursor: default;
+}
+
+/* Number Badge (Circle 32px, bold digit) */
+html body .option-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-soft);
+  border: 2px solid var(--line-strong);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  flex-shrink: 0;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+html body .option-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Correct Option State */
+html body .option.correct {
+  border-color: var(--good) !important;
+  background: var(--good-soft) !important;
+  color: var(--text) !important;
+  padding-right: 46px;
+}
+
+html body .option.correct .option-badge {
+  background: var(--good) !important;
+  color: #ffffff !important;
+  border-color: var(--good) !important;
+}
+
+html body .option.correct::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--good);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Wrong Option State */
+html body .option.wrong {
+  border-color: var(--danger) !important;
+  background: var(--danger-soft) !important;
+  color: var(--text) !important;
+  padding-right: 46px;
+}
+
+html body .option.wrong .option-badge {
+  background: var(--danger) !important;
+  color: #ffffff !important;
+  border-color: var(--danger) !important;
+}
+
+html body .option.wrong::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--danger);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Explanation Feedback Box */
+html body .feedback {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: 0 10px 10px 0;
+  border-left: 4px solid var(--primary);
+  background: var(--surface-soft);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+html body .feedback.good {
+  border-left-color: var(--good);
+  background: var(--good-soft);
+}
+
+html body .feedback.wrong {
+  border-left-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+html body .feedback-sources {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+html body .feedback-sources a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Practice Next Action Button */
+html body .next {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Mobile Sticky Action Bar & Floating Back Pill offset */
+@media (max-width: 639px) {
+  html body:has(#next),
+  html body:has(.next),
+  html body main:has(.next),
+  html body.has-back-nav {
+    padding-bottom: calc(108px + env(safe-area-inset-bottom)) !important;
+  }
+
+  html body .card:has(.next:not(.hidden)) .next:not(.hidden),
+  html body .next:not(.hidden) {
+    position: sticky;
+    bottom: 12px;
+    z-index: 20;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16) !important;
+  }
+
+  /* Lift the floating back-nav-fab pill above the sticky action bar */
+  html body .back-nav-fab {
+    bottom: calc(78px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* Topic Filter & Bank Info */
+html body .practice-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+html body .practice-filter select {
+  flex: 1;
+  min-width: 0;
+}
+
+html body .bank-info {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+html body .bank-info summary {
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Exam Result Summary Card */
+html body .exam-result-card {
+  padding: 8px 0;
+  text-align: center;
+}
+
+html body .exam-result-head {
+  margin-bottom: 24px;
+}
+
+html body .exam-result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+html body .exam-result-badge.passed {
+  background: var(--good-soft);
+  color: var(--good);
+  border: 1px solid var(--good-border);
+}
+
+html body .exam-result-badge.failed {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1px solid var(--danger-border);
+}
+
+html body .exam-result-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+html body .exam-result-score {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 10px 0 6px;
+  letter-spacing: -0.01em;
+}
+
+html body .exam-result-note {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 auto 20px;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+html body .exam-result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+html body .exam-result-stat-item {
+  padding: 12px 8px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+html body .exam-result-stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+html body .exam-result-stat-value {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+html body .exam-result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+html body .exam-result-retry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  background: var(--primary);
+  color: var(--primary-text);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-button);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--accent-strong);
+  transition: all 120ms ease;
+}
+
+html body .exam-result-retry-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--accent-strong);
+}
+
+html body .exam-result-retry-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--accent-strong);
+}
+
+html body .exam-result-sub-actions {
+  display: flex;
+  gap: 10px;
+}
+
+html body .exam-result-sub-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 8px 14px;
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-button);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 0 var(--line-strong);
+  transition: all 120ms ease;
+}
+
+html body .exam-result-sub-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+@media (max-width: 480px) {
+  html body .exam-result-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  html body .exam-result-sub-actions {
+    flex-direction: column;
+  }
+}
+
+/* Agriculture Category Diagnostic Report */
+html body .exam-diag-report {
+  margin: 20px 0 16px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  text-align: left;
+}
+html body .exam-diag-title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+}
+html body .exam-diag-lead {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+html body .exam-diag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+html body .exam-diag-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+html body .exam-diag-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+html body .exam-diag-name {
+  font-weight: 700;
+  color: var(--text);
+}
+html body .exam-diag-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+html body .exam-diag-badge.status-excellent {
+  background: #E8F5E9;
+  color: #1B5E20;
+}
+html body .exam-diag-badge.status-review {
+  background: #FEF3C7;
+  color: #92400E;
+}
+html body .exam-diag-badge.status-weak {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+html body .exam-diag-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+html body .exam-diag-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+html body .exam-diag-bar-fill.status-excellent {
+  background: #2E7D32;
+}
+html body .exam-diag-bar-fill.status-review {
+  background: #D97706;
+}
+html body .exam-diag-bar-fill.status-weak {
+  background: #DC2626;
+}
+html body .exam-diag-advice {
+  padding: 14px;
+  background: var(--card);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+html body .exam-diag-advice-title {
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+html body .exam-diag-advice-text {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+  color: var(--text-sub);
+}
+html body .exam-diag-vocab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: #FFFFFF !important;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-button);
+  text-decoration: none;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+html body .exam-diag-vocab-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* PWA Install Banner & Offline Status Toast */
+html body .pwa-install-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1F4E79 0%, #163857 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+html body .pwa-install-banner.is-hidden {
+  display: none !important;
+}
+html body .pwa-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+html body .pwa-banner-icon {
+  font-size: 24px;
+}
+html body .pwa-banner-text {
+  display: flex;
+  flex-direction: column;
+}
+html body .pwa-banner-text strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+html body .pwa-banner-text span {
+  font-size: 12px;
+  opacity: 0.85;
+}
+html body .pwa-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+html body .pwa-install-btn {
+  padding: 6px 14px;
+  background: #C5A059;
+  color: #1F4E79;
+  border: none;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+html body .pwa-install-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+html body .pwa-dismiss-btn {
+  background: transparent;
+  color: #FFFFFF;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.75;
+}
+html body .pwa-dismiss-btn:hover {
+  opacity: 1;
+}
+
+html body .pwa-status-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 9999;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: transform 300ms cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 300ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+html body .pwa-status-toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+html body .pwa-status-toast.is-offline {
+  background: #374151;
+  color: #F9FAFB;
+  border: 1px solid #4B5563;
+}
+html body .pwa-status-toast.is-online {
+  background: #065F46;
+  color: #ECFDF5;
+  border: 1px solid #059669;
+}
+
+/* ============================================================
+   9. VOCABULARY PAGES (*-vocab.html)
+   ============================================================ */
+
+html body main:has(.vocabulary) {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 64px;
+}
+
+/* Filter controls: search input 52px tall with icon */
+html body .filters {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.2fr) minmax(220px, 0.8fr);
+  gap: 16px;
+  margin: 22px 0;
+}
+
+@media (max-width: 680px) {
+  html body .filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+html body .filter {
+  display: grid;
+  gap: 7px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 14px;
+  position: relative;
+}
+
+html body .filter input[type="search"],
+html body .filter input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px 12px 44px;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-input);
+  color: var(--text);
+  background-color: var(--card) !important;
+  font-size: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2366717D' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 14px center;
+  background-size: 18px;
+  transition: border-color 120ms ease;
+}
+
+html body .filter input:focus {
+  border-color: var(--primary) !important;
+}
+
+html body .filter select {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 36px 12px 16px;
+  border: 2px solid var(--line-strong) !important;
+  border-radius: var(--radius-input);
+  color: var(--text);
+  background-color: var(--card) !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Tools heading bar */
+html body .tools {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 24px 0 14px;
+}
+
+html body .tools h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+html body .count {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Vocabulary Cards Grid */
+html body .vocabulary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 680px) {
+  html body .vocabulary {
+    grid-template-columns: 1fr;
+  }
+}
+
+html body .word[hidden],
+html body .word.is-hidden,
+html body [hidden] {
+  display: none !important;
+}
+
+html body .word {
+  min-height: 160px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 140ms ease;
+}
+
+html body .word:hover {
+  transform: none;
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-hover);
+}
+
+html body .word__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+html body .word__category {
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: var(--sector-soft);
+  color: var(--sector);
+  border: 1px solid var(--sector);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+html body .word__term {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+html body .word__meaning {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+html body .word__note {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+html body .empty {
+  grid-column: 1 / -1;
+  padding: 42px 24px;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  background: var(--card);
+  text-align: center;
+  font-size: 15px;
+}
+
+/* Pager Controls */
+html body .pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+html body .pager button {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+html body .page-status {
+  min-width: 120px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ============================================================
+   10. MISTAKE NOTEBOOK (mistakes.html)
+   ============================================================ */
+
+html body main:has(.mistake-list) {
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+html body .notebook-actions {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+
+html body .notebook-actions .clear {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--danger) !important;
+  border-radius: var(--radius-button);
+  background: var(--card) !important;
+  color: var(--danger) !important;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--line-strong);
+  transition: all 120ms ease;
+}
+
+html body .notebook-actions .clear:hover {
+  background: var(--danger-soft) !important;
+}
+
+html body .notebook-actions .clear:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--line-strong);
+}
+
+html body .mistake-list {
+  display: grid;
+  gap: 16px;
+}
+
+html body .mistake {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+html body .mistake__field {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  width: fit-content;
+  margin: 0;
+}
+
+html body .mistake__question {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+html body .mistake__answer {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--good);
+}
+
+html body .mistake__explanation {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+html body .mistake__done {
+  align-self: flex-start;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 2px solid var(--good) !important;
+  border-radius: var(--radius-button);
+  background: var(--card) !important;
+  color: var(--good) !important;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--line-strong);
+  transition: all 120ms ease;
+  margin-top: 4px;
+}
+
+html body .mistake__done:hover {
+  background: var(--good-soft) !important;
+}
+
+html body .mistake__done:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--line-strong);
+}
+
+/* Empty State Card */
+html body .empty-state-card {
+  padding: 48px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+html body .empty-state-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html body .empty-state-card__text {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 440px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   11. RESPONSIVENESS & ACCESSIBILITY GUARDS
+   ============================================================ */
+
+/* Mobile viewports under 640px */
+@media (max-width: 639px) {
+  html body .topbar {
+    padding: 8px 12px !important;
+  }
+  html body .topbar-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding: 4px 0 !important;
+  }
+
+  /* Row 1: Brand / Back + Title */
+  html body .topbar .brand,
+  html body .topbar .brand-lockup {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  html body .topbar .brand .brand-title,
+  html body .brand-name {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  html body .topbar .brand .brand-subtitle,
+  html body .brand-sub {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Row 2: one wrapping horizontal row for all controls */
+  html body .topbar .settings,
+  html body .topbar .controls {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  /* Override the inline width: 100% on .control-group from menu files */
+  html body .settings .control-group {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  html body .settings .control-group[aria-label*="Font"],
+  html body .settings .control-group:has(.font-button:not(.theme-toggle)) {
+    display: inline-flex !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+    border: 2px solid var(--line-strong) !important;
+    border-radius: var(--radius-button) !important;
+    background: var(--card) !important;
+    min-height: 44px !important;
+    padding: 0 4px !important;
+  }
+
+  /* Hide the "言語" label text visually on mobile */
+  html body .settings .control-label,
+  html body .control-label[for="langSelect"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  html body .settings select,
+  html body .controls select {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    min-height: 44px !important;
+    font-size: 13.5px !important;
+    padding: 0 30px 0 12px !important;
+  }
+
+  html body .topbar .notebook-link,
+  html body .settings .notebook-link {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    min-height: 44px !important;
+    padding: 0 12px !important;
+    font-size: 13.5px !important;
+  }
+
+  html body .settings #themeToggle,
+  html body .settings .theme-toggle,
+  html body .controls .theme-toggle {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    min-height: 44px !important;
+    padding: 0 12px !important;
+    font-size: 13.5px !important;
+  }
+
+  html body #globalSettingsButton,
+  html body .global-settings-button {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    flex: 0 0 44px !important;
+  }
+
+  html body .back,
+  html body .topbar .back-button,
+  html body .control,
+  html body .theme {
+    min-height: 44px;
+    font-size: 14px;
+  }
+  html body .primary-button,
+  html body .secondary-button,
+  html body .next {
+    min-height: 56px;
+  }
+  html body .option,
+  html body .answer-button {
+    min-height: 56px;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+  html body .hero:has(.hero-panel) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  html body .hero-panel .metric-number {
+    font-size: 38px !important;
+  }
+}
+
+/* 360px viewport guard — guarantee NO horizontal overflow */
+@media (max-width: 380px) {
+  html body {
+    font-size: 15px;
+  }
+  html body .brand-name,
+  html body .brand-title {
+    font-size: 15px;
+  }
+  html body .brand-sub,
+  html body .brand-subtitle {
+    display: none;
+  }
+  html body .controls select,
+  html body .settings select {
+    padding-right: 28px;
+    font-size: 13px;
+  }
+  html body .card {
+    padding: 18px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body *,
+  html body *::before,
+  html body *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Finish Exam Button */
+html body .finish-exam-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 18px;
+  border: 2px solid var(--primary, #1F4E79);
+  border-radius: var(--radius-button, 10px);
+  background: var(--card, #ffffff);
+  color: var(--primary, #1F4E79);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 750;
+  cursor: pointer;
+  text-align: center;
+  transition: all 140ms ease;
+  box-shadow: 0 2px 0 var(--line);
+}
+html body .finish-exam-btn:hover:not(.is-disabled) {
+  background: color-mix(in srgb, var(--primary, #1F4E79) 10%, transparent);
+  border-color: var(--primary, #1F4E79);
+  transform: translateY(-1px);
+}
+html body .finish-exam-btn.is-disabled {
+  opacity: 0.6;
+  border-color: var(--line, #ccc);
+  color: var(--muted, #888);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Exam Result Dual Progress Bar */
+html body .exam-dual-bar-wrap {
+  max-width: 480px;
+  margin: 14px auto 22px;
+  width: 100%;
+}
+html body .exam-dual-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 750;
+  margin-bottom: 6px;
+}
+html body .dual-label-correct {
+  color: #16a34a;
+}
+html body .dual-label-wrong {
+  color: #dc2626;
+}
+html body .exam-dual-bar-track {
+  display: flex;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--line, #dbe3ea);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+html body .exam-dual-bar-fill-correct {
+  background: #22c55e;
+  transition: width 0.4s ease;
+  min-width: 0;
+}
+html body .exam-dual-bar-fill-wrong {
+  background: #ef4444;
+  transition: width 0.4s ease;
+  min-width: 0;
+}
+
+/* 4-column Exam Stats */
+html body .exam-result-stats-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+html body .stat-val-correct {
+  color: #16a34a !important;
+  font-weight: 800;
+}
+html body .stat-val-wrong {
+  color: #dc2626 !important;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  html body .exam-result-stats-4col {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+/* Mistake Review Section on Result Screen */
+html body .exam-review-section {
+  margin: 24px 0 20px;
+  text-align: left;
+}
+html body .exam-review-header {
+  margin-bottom: 14px;
+}
+html body .exam-review-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+html body .exam-review-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+html body .exam-review-toggle-group {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--surface-soft, rgba(0, 0, 0, 0.04));
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+html body .exam-review-toggle-btn {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+html body .exam-review-toggle-btn.is-active {
+  background: var(--card, #ffffff);
+  color: var(--primary, #1F4E79);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+body.dark html body .exam-review-toggle-btn.is-active {
+  background: var(--surface, #1e2633);
+  color: #ffffff;
+}
+
+html body .review-all-correct-box {
+  padding: 20px;
+  text-align: center;
+  background: color-mix(in srgb, #22c55e 12%, transparent);
+  border: 1.5px solid #86efac;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+html body .review-all-correct-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+html body .review-all-correct-text {
+  font-size: 15px;
+  font-weight: 750;
+  color: #15803d;
+  margin: 0;
+}
+body.dark html body .review-all-correct-text {
+  color: #86efac;
+}
+
+html body .exam-review-card {
+  padding: 16px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  border-radius: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+html body .exam-review-card.is-wrong {
+  border-left: 5px solid #ef4444;
+}
+html body .exam-review-card.is-correct {
+  border-left: 5px solid #22c55e;
+}
+
+html body .review-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 750;
+}
+html body .review-head-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+html body .review-cat-badge {
+  background: color-mix(in srgb, var(--primary, #1F4E79) 12%, transparent);
+  color: var(--primary, #1F4E79);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+html body .review-status-badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+html body .review-status-badge.wrong {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+html body .review-status-badge.correct {
+  background: #dcfce7;
+  color: #15803d;
+}
+body.dark html body .review-status-badge.wrong {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+body.dark html body .review-status-badge.correct {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+html body .review-prompt-ja {
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+html body .review-prompt-native {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+html body .review-ans-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+html body .review-ans-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+html body .review-ans-row.user-wrong {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #9f1239;
+}
+html body .review-ans-row.correct-ans {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+body.dark html body .review-ans-row.user-wrong {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+body.dark html body .review-ans-row.correct-ans {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+html body .review-ans-label {
+  font-weight: 750;
+  font-size: 12px;
+  white-space: nowrap;
+}
+html body .review-ans-val {
+  font-weight: 700;
+}
+
+html body .review-exp-box {
+  background: var(--surface-soft, rgba(0, 0, 0, 0.03));
+  border-left: 3.5px solid var(--primary, #1F4E79);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+html body .review-exp-block {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text);
+}
+html body .review-exp-tag {
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--primary, #1F4E79);
+  display: inline-block;
+  margin-right: 4px;
+}
+body.dark html body .review-exp-tag {
+  color: var(--accent, #5B8FC7);
+}
+
+/* Mistakes page extra styles */
+html body .mistake__user-answer {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #dc2626;
+}
+html body .mistake__answers {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 6px 0;
+}
+html body .mistake__explanation .exp-native {
+  margin: 0 0 4px;
+  color: var(--text);
+  font-weight: 600;
+}
+html body .mistake__explanation .exp-ja {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}

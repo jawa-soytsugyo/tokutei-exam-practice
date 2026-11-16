@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>自動車整備分野の語彙</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vocabulary.css?v=20261116-1" />
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-sector="automobile">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="back" class="back" href="./index.html">戻る</a>
+      <div class="controls">
+        <a id="notebookLink" class="back notebook-link" href="./mistakes.html">間違いノート</a>
+        <select id="language" aria-label="言語">
+          <option value="ja">日本語</option>
+          <option value="uz">O'zbek</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="theme" class="theme control" type="button" aria-label="夜間表示"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <span id="eyebrow" class="eyebrow">特定技能 · 自動車整備</span>
+      <h1 id="title">自動車整備分野の語彙</h1>
+      <p id="lead" class="lead">自動車整備で使う大切な日本語を復習しましょう。</p>
+    </section>
+    <section class="filters" aria-label="語彙の絞り込み">
+      <label class="filter" for="search">
+        <span id="searchLabel">検索</span>
+        <input id="search" type="search" autocomplete="off" />
+      </label>
+      <label class="filter" for="category">
+        <span id="categoryLabel">項目</span>
+        <select id="category"></select>
+      </label>
+    </section>
+    <div class="tools">
+      <div class="tools-left">
+        <h2 id="listTitle">基本用語</h2>
+        <span id="count" class="count" aria-live="polite"></span>
+      </div>
+      <div class="view-switch" role="tablist" aria-label="表示モード">
+        <button id="viewListBtn" class="view-btn is-active" type="button" aria-selected="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span id="viewListLabel">一覧</span>
+        </button>
+        <button id="viewFlashcardBtn" class="view-btn" type="button" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="viewFlashcardLabel">単語カード (Flashcard)</span>
+        </button>
+      </div>
+    </div>
+    <section id="flashcardArea" class="flashcard-area is-hidden" aria-label="単語カード">
+      <div class="fc-header">
+        <span id="fcCategory" class="fc-category-badge"></span>
+        <span id="fcCount" class="fc-counter">1 / 1000</span>
+      </div>
+      <div id="fcCard" class="fc-card" tabindex="0" role="button" aria-label="タップして意味を表示">
+        <div class="fc-card-inner">
+          <div class="fc-face fc-front">
+            <span class="fc-badge-hint" id="fcHintLabel">👆 タップで意味を表示</span>
+            <p id="fcTerm" class="fc-term"></p>
+            <p id="fcFrontReading" class="fc-reading-sub"></p>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="fc-back-category" id="fcBackCategory"></span>
+            <p id="fcMeaning" class="fc-meaning"></p>
+            <p id="fcReading" class="fc-reading"></p>
+            <p id="fcNote" class="fc-note"></p>
+          </div>
+        </div>
+      </div>
+      <div class="fc-controls">
+        <button id="fcPrev" class="fc-btn fc-nav" type="button">⬅️ 前へ</button>
+        <button id="fcFlip" class="fc-btn fc-flip" type="button">🔄 めくる</button>
+        <button id="fcNext" class="fc-btn fc-nav" type="button">次へ ➡️</button>
+      </div>
+      <div class="fc-actions">
+        <button id="fcMistake" class="fc-action-btn fc-mistake" type="button">❌ 覚えていない</button>
+        <button id="fcKnown" class="fc-action-btn fc-known" type="button">✅ 覚えた！</button>
+      </div>
+    </section>
+    <section id="vocabulary" class="vocabulary" aria-labelledby="listTitle">
+      <article class="word"><p class="word__term"><ruby>自動車<rt>じどうしゃ</rt></ruby></p><p class="word__meaning" data-uz="Avtomobil" data-ja="人や物を運ぶための車" data-en="Automobile" data-ne="मोटरगाडी">Avtomobil</p><p class="word__note" data-uz="Texnik xizmat va ta'mirlashning asosiy obyekti." data-ja="整備や修理をする対象の車です。" data-en="It is the vehicle that is serviced and repaired." data-ne="मर्मतसम्भार र मर्मत गरिने सवारी हो।">Texnik xizmat va ta'mirlashning asosiy obyekti.</p></article>
+      <article class="word"><p class="word__term"><ruby>整備<rt>せいび</rt></ruby></p><p class="word__meaning" data-uz="Texnik xizmat, ta'mirlash" data-ja="車を安全に使えるように点検・修理すること" data-en="Vehicle maintenance" data-ne="सवारी मर्मतसम्भार">Texnik xizmat, ta'mirlash</p><p class="word__note" data-uz="Avtomobilni xavfsiz va yaxshi holatda saqlash uchun bajariladi." data-ja="車を安全でよい状態に保つために行います。" data-en="It is performed to keep a vehicle safe and in good condition." data-ne="सवारीलाई सुरक्षित र राम्रो अवस्थामा राख्न गरिन्छ।">Avtomobilni xavfsiz va yaxshi holatda saqlash uchun bajariladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>点検<rt>てんけん</rt></ruby></p><p class="word__meaning" data-uz="Tekshiruv" data-ja="故障や異常がないか調べること" data-en="Inspection" data-ne="जाँच">Tekshiruv</p><p class="word__note" data-uz="Nosozlikni erta topish uchun avtomobil qismlari tekshiriladi." data-ja="故障を早く見つけるために部品を調べます。" data-en="Vehicle parts are checked to find problems early." data-ne="खराबी चाँडै पत्ता लगाउन सवारीका पुर्जा जाँचिन्छन्।">Nosozlikni erta topish uchun avtomobil qismlari tekshiriladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>部品<rt>ぶひん</rt></ruby></p><p class="word__meaning" data-uz="Ehtiyot qism" data-ja="車を作っている一つ一つの部材" data-en="Part, component" data-ne="पुर्जा">Ehtiyot qism</p><p class="word__note" data-uz="Kerak bo'lsa, eskirgan yoki buzilgan qism almashtiriladi." data-ja="古くなったり壊れたりしたら交換します。" data-en="Worn or broken parts are replaced when necessary." data-ne="पुरानो वा बिग्रिएको पुर्जा आवश्यक परे बदलिन्छ।">Kerak bo'lsa, eskirgan yoki buzilgan qism almashtiriladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>工具<rt>こうぐ</rt></ruby></p><p class="word__meaning" data-uz="Asbob-uskunalar" data-ja="整備や修理に使う道具" data-en="Tools" data-ne="औजारहरू">Asbob-uskunalar</p><p class="word__note" data-uz="Ish uchun mos asbobni tanlab, undan xavfsiz foydalaning." data-ja="作業に合う工具を選び、安全に使います。" data-en="Choose the correct tool for the job and use it safely." data-ne="कामअनुसार सही औजार छानेर सुरक्षित रूपमा प्रयोग गर्नुहोस्।">Ish uchun mos asbobni tanlab, undan xavfsiz foydalaning.</p></article>
+      <article class="word"><p class="word__term"><ruby>車検<rt>しゃけん</rt></ruby></p><p class="word__meaning" data-uz="Avtomobil texnik ko'rigi" data-ja="車の安全や環境を確認する検査" data-en="Vehicle inspection" data-ne="सवारी परीक्षण">Avtomobil texnik ko'rigi</p><p class="word__note" data-uz="Avtomobilning qonuniy va xavfsiz holatini tekshirish uchun o'tkaziladi." data-ja="車が安全で法律に合っているか確認します。" data-en="It checks whether a vehicle is safe and meets legal requirements." data-ne="सवारी सुरक्षित र कानुनी मापदण्डअनुसार छ कि छैन जाँचिन्छ।">Avtomobilning qonuniy va xavfsiz holatini tekshirish uchun o'tkaziladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>交換<rt>こうかん</rt></ruby></p><p class="word__meaning" data-uz="Almashtirish" data-ja="古い物や壊れた物を新しい物に替えること" data-en="Replacement" data-ne="बदल्ने काम">Almashtirish</p><p class="word__note" data-uz="Yaroqsiz ehtiyot qism yangi qism bilan almashtiriladi." data-ja="使えない部品を新しい部品に替えます。" data-en="An unusable part is replaced with a new one." data-ne="प्रयोग गर्न नमिल्ने पुर्जा नयाँ पुर्जाले बदलिन्छ।">Yaroqsiz ehtiyot qism yangi qism bilan almashtiriladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>修理<rt>しゅうり</rt></ruby></p><p class="word__meaning" data-uz="Ta'mirlash" data-ja="壊れた所を直して使えるようにすること" data-en="Repair" data-ne="मर्मत">Ta'mirlash</p><p class="word__note" data-uz="Buzilgan joy avtomobilni yana ishlatish uchun tuzatiladi." data-ja="壊れた所を直して、また使えるようにします。" data-en="A damaged area is fixed so the vehicle can be used again." data-ne="बिग्रिएको भाग मर्मत गरेर सवारी फेरि चलाउन मिल्ने बनाइन्छ।">Buzilgan joy avtomobilni yana ishlatish uchun tuzatiladi.</p></article>
+      <article class="word"><p class="word__term"><ruby>故障<rt>こしょう</rt></ruby></p><p class="word__meaning" data-uz="Nosozlik" data-ja="機械や部品が正常に動かないこと" data-en="Malfunction" data-ne="खराबी">Nosozlik</p><p class="word__note" data-uz="G'alati tovush yoki ogohlantirish chirog'i nosozlik belgisi bo'lishi mumkin." data-ja="異音や警告灯は故障のサインかもしれません。" data-en="An unusual sound or warning light may be a sign of a malfunction." data-ne="असामान्य आवाज वा चेतावनी बत्ती खराबीको सङ्केत हुन सक्छ।">G'alati tovush yoki ogohlantirish chirog'i nosozlik belgisi bo'lishi mumkin.</p></article>
+      <article class="word"><p class="word__term"><ruby>安全<rt>あんぜん</rt></ruby></p><p class="word__meaning" data-uz="Xavfsizlik" data-ja="危険がなく安心できること" data-en="Safety" data-ne="सुरक्षा">Xavfsizlik</p><p class="word__note" data-uz="Ustaxonada ish boshlashdan oldin xavfsizlik qoidalariga amal qiling." data-ja="作業を始める前に安全のルールを守ります。" data-en="Follow safety rules before starting work in the workshop." data-ne="कार्यशालामा काम सुरु गर्नु अघि सुरक्षा नियम पालना गर्नुहोस्।">Ustaxonada ish boshlashdan oldin xavfsizlik qoidalariga amal qiling.</p></article>
+    </section>
+    <nav class="pager" aria-label="ページ移動">
+      <button id="previous" type="button">前へ</button>
+      <span id="pageStatus" class="page-status"></span>
+      <button id="next" type="button">次へ</button>
+    </nav>
+  </main>
+  <script>
+    const labels = {
+      uz: {
+        eyebrow: 'Tokutei Ginou · Avtomobil ta’mirlash',
+        title: "Avtomobil ta'mirlash lug'ati",
+        lead: "Ustaxona va texnik xizmatdagi asosiy yaponcha atamalarni takrorlang.",
+        list: 'Asosiy atamalar',
+        back: 'Ortga',
+        notebook: 'Xatolar daftarim'
+      },
+      ja: {
+        eyebrow: '特定技能 · 自動車整備',
+        title: '自動車整備分野の語彙',
+        lead: '自動車整備で使う大切な日本語を復習しましょう。',
+        list: '基本用語',
+        back: '戻る',
+        notebook: '間違いノート'
+      },
+      en: {
+        eyebrow: 'Specified Skilled Worker · Automobile Maintenance',
+        title: 'Automobile maintenance vocabulary',
+        lead: 'Review essential Japanese terms used in vehicle maintenance.',
+        list: 'Key terms',
+        back: 'Back',
+        notebook: 'My mistakes'
+      },
+      ne: {
+        eyebrow: 'विशिष्ट दक्ष कामदार · सवारी मर्मतसम्भार',
+        title: 'सवारी मर्मतसम्भार शब्दावली',
+        lead: 'सवारी मर्मतसम्भारमा प्रयोग हुने महत्त्वपूर्ण जापानी शब्दहरू दोहोर्याउनुहोस्।',
+        list: 'मुख्य शब्दहरू',
+        back: 'फर्कनुहोस्',
+        notebook: 'गल्तीहरूको नोटबुक'
+      },
+      my: {
+        eyebrow: 'သတ်မှတ်ကျွမ်းကျင်လုပ်သား · မော်တော်ယာဉ် ပြုပြင်ထိန်းသိမ်းရေး',
+        title: 'မော်တော်ယာဉ် ပြုပြင်ထိန်းသိမ်းမှု ဝေါဟာရ',
+        lead: 'ယာဉ်ပြုပြင်ထိန်းသိမ်းမှုတွင် အသုံးပြုသည့် အရေးကြီးသော ဂျပန်ဝေါဟာရများကို ပြန်လည်လေ့လာပါ။',
+        list: 'အဓိက ဝေါဟာရများ',
+        back: 'နောက်သို့',
+        notebook: 'အမှားမှတ်စု'
+      }
+    };
+    window.__VOCAB_PAGE_LABELS__ = labels;
+
+    function applyVocabLocale(lang) {
+      const activeLang = labels[lang] ? lang : 'ja';
+      const current = labels[activeLang] || labels.ja;
+      document.documentElement.lang = activeLang;
+      document.title = current.title;
+      const elEyebrow = document.getElementById('eyebrow');
+      if (elEyebrow) elEyebrow.textContent = current.eyebrow;
+      const elTitle = document.getElementById('title');
+      if (elTitle) elTitle.textContent = current.title;
+      const elLead = document.getElementById('lead');
+      if (elLead) elLead.textContent = current.lead;
+      const elList = document.getElementById('listTitle');
+      if (elList) elList.textContent = current.list;
+      const elBack = document.getElementById('back');
+      if (elBack) elBack.textContent = current.back;
+      const elNotebook = document.getElementById('notebookLink');
+      if (elNotebook) elNotebook.textContent = current.notebook;
+      document.querySelectorAll('[data-uz]').forEach((item) => {
+        item.textContent = item.dataset[activeLang] ?? item.dataset.ja ?? item.dataset.en ?? '';
+      });
+      const langSelect = document.getElementById('language');
+      if (langSelect && langSelect.value !== activeLang) {
+        langSelect.value = activeLang;
+      }
+    }
+
+    const language = localStorage.getItem('language') || 'ja';
+    applyVocabLocale(language);
+
+    const langSelect = document.getElementById('language');
+    if (langSelect) {
+      langSelect.value = labels[language] ? language : 'ja';
+      langSelect.addEventListener('change', (e) => {
+        const nextLang = labels[e.target.value] ? e.target.value : 'ja';
+        localStorage.setItem('language', nextLang);
+        applyVocabLocale(nextLang);
+      });
+    }
+
+    window.ThemeManager?.updateUI();
+  </script>
+  <script src="./mistake-notebook.js"></script>
+  <script src="./sector-vocabulary-reviewed.js"></script>
+  <script src="./automobile-vocabulary-1000.js"></script>
+  <script src="./vocabulary-page.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

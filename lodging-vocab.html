@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>宿泊業分野の語彙</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vocabulary.css?v=20261116-1" />
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-sector="lodging">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="back" class="back" href="./index.html">戻る</a>
+      <div class="controls">
+        <a id="notebookLink" class="back notebook-link" href="./mistakes.html">間違いノート</a>
+        <select id="language" aria-label="言語">
+          <option value="ja">日本語</option>
+          <option value="uz">O'zbek</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="theme" class="theme control" type="button" aria-label="夜間表示"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <span id="eyebrow" class="eyebrow">特定技能 · 宿泊業</span>
+      <h1 id="title">宿泊業分野の語彙</h1>
+      <p id="lead" class="lead">ホテルや旅館で使う大切な日本語を復習しましょう。</p>
+    </section>
+
+    <section class="filters" aria-label="語彙の絞り込み">
+      <label class="filter" for="search">
+        <span id="searchLabel">検索</span>
+        <input id="search" type="search" autocomplete="off" />
+      </label>
+      <label class="filter" for="category">
+        <span id="categoryLabel">項目</span>
+        <select id="category"></select>
+      </label>
+    </section>
+    <div class="tools">
+      <div class="tools-left">
+        <h2 id="listTitle">基本用語</h2>
+        <span id="count" class="count" aria-live="polite"></span>
+      </div>
+      <div class="view-switch" role="tablist" aria-label="表示モード">
+        <button id="viewListBtn" class="view-btn is-active" type="button" aria-selected="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span id="viewListLabel">一覧</span>
+        </button>
+        <button id="viewFlashcardBtn" class="view-btn" type="button" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="viewFlashcardLabel">単語カード (Flashcard)</span>
+        </button>
+      </div>
+    </div>
+    <section id="flashcardArea" class="flashcard-area is-hidden" aria-label="単語カード">
+      <div class="fc-header">
+        <span id="fcCategory" class="fc-category-badge"></span>
+        <span id="fcCount" class="fc-counter">1 / 1000</span>
+      </div>
+      <div id="fcCard" class="fc-card" tabindex="0" role="button" aria-label="タップして意味を表示">
+        <div class="fc-card-inner">
+          <div class="fc-face fc-front">
+            <span class="fc-badge-hint" id="fcHintLabel">👆 タップで意味を表示</span>
+            <p id="fcTerm" class="fc-term"></p>
+            <p id="fcFrontReading" class="fc-reading-sub"></p>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="fc-back-category" id="fcBackCategory"></span>
+            <p id="fcMeaning" class="fc-meaning"></p>
+            <p id="fcReading" class="fc-reading"></p>
+            <p id="fcNote" class="fc-note"></p>
+          </div>
+        </div>
+      </div>
+      <div class="fc-controls">
+        <button id="fcPrev" class="fc-btn fc-nav" type="button">⬅️ 前へ</button>
+        <button id="fcFlip" class="fc-btn fc-flip" type="button">🔄 めくる</button>
+        <button id="fcNext" class="fc-btn fc-nav" type="button">次へ ➡️</button>
+      </div>
+      <div class="fc-actions">
+        <button id="fcMistake" class="fc-action-btn fc-mistake" type="button">❌ 覚えていない</button>
+        <button id="fcKnown" class="fc-action-btn fc-known" type="button">✅ 覚えた！</button>
+      </div>
+    </section>
+
+    <section id="vocabulary" class="vocabulary" aria-labelledby="listTitle">
+      <article class="word">
+        <p class="word__term"><ruby>宿泊業<rt>しゅくはくぎょう</rt></ruby></p>
+        <p class="word__meaning" data-uz="Mehmonxona xizmati" data-ja="宿泊業" data-en="Lodging industry" data-ne="आवास सेवा" data-my="တည်းခိုဝန်ဆောင်မှု လုပ်ငန်း">Mehmonxona xizmati</p>
+        <p class="word__note" data-uz="Mehmonlarni joylashtirish va ularga xizmat ko'rsatish sohasi." data-ja="ホテルや旅館などでお客様を迎え、サービスを提供する仕事です。" data-en="Work that accommodates and serves guests at hotels and inns." data-ne="होटल वा र्योकानमा पाहुनालाई बस्न र सेवा दिनेसम्बन्धी काम हो।" data-my="ဟိုတယ်နှင့် တည်းခိုခန်းများတွင် ဧည့်သည်များကို လက်ခံပြီး ဝန်ဆောင်မှုပေးသည့် လုပ်ငန်းဖြစ်သည်။">Mehmonlarni joylashtirish va ularga xizmat ko'rsatish sohasi.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>予約<rt>よやく</rt></ruby></p>
+        <p class="word__meaning" data-uz="Bron qilish" data-ja="予約" data-en="Reservation" data-ne="आरक्षण" data-my="ကြိုတင်ဘွတ်ကင်လုပ်ခြင်း">Bron qilish</p>
+        <p class="word__note" data-uz="Mehmon kelishidan oldin xona yoki xizmatni band qilish." data-ja="お客様が来る前に部屋やサービスを確保することです。" data-en="Securing a room or service before the guest arrives." data-ne="पाहुना आउनुअघि कोठा वा सेवा निश्चित गर्नु हो।" data-my="ဧည့်သည်မရောက်မီ အခန်း သို့မဟုတ် ဝန်ဆောင်မှုကို ကြိုတင်သေချာစွာ စီစဉ်ထားခြင်းဖြစ်သည်။">Mehmon kelishidan oldin xona yoki xizmatni band qilish.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>客室<rt>きゃくしつ</rt></ruby></p>
+        <p class="word__meaning" data-uz="Mehmon xonasi" data-ja="客室" data-en="Guest room" data-ne="अतिथि कोठा" data-my="ဧည့်သည်အခန်း">Mehmon xonasi</p>
+        <p class="word__note" data-uz="Mehmon yashashi yoki tunashi uchun tayyorlangan xona." data-ja="お客様が滞在したり、泊まったりするための部屋です。" data-en="A room prepared for a guest to stay or sleep in." data-ne="पाहुना बस्न वा रात बिताउन तयार गरिएको कोठा हो।" data-my="ဧည့်သည် တည်းခိုရန် သို့မဟုတ် အိပ်စက်ရန် ပြင်ဆင်ထားသော အခန်းဖြစ်သည်။">Mehmon yashashi yoki tunashi uchun tayyorlangan xona.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>受付<rt>うけつけ</rt></ruby></p>
+        <p class="word__meaning" data-uz="Qabulxona" data-ja="受付" data-en="Reception desk" data-ne="रिसेप्सन" data-my="ဧည့်ကြိုကောင်တာ">Qabulxona</p>
+        <p class="word__note" data-uz="Mehmonlarni kutib olib, ma'lumot va xizmat ko'rsatadigan joy." data-ja="お客様を迎え、案内や手続きをする場所です。" data-en="The place where guests are welcomed, guided, and checked in." data-ne="पाहुनालाई स्वागत, जानकारी र आवश्यक प्रक्रिया गरिने ठाउँ हो।" data-my="ဧည့်သည်များကို ကြိုဆိုပြီး လမ်းညွှန်ခြင်းနှင့် လိုအပ်သော လုပ်ငန်းစဉ်များကို ဆောင်ရွက်ပေးသည့်နေရာဖြစ်သည်။">Mehmonlarni kutib olib, ma'lumot va xizmat ko'rsatadigan joy.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>清掃<rt>せいそう</rt></ruby></p>
+        <p class="word__meaning" data-uz="Tozalash" data-ja="清掃" data-en="Cleaning" data-ne="सरसफाइ" data-my="သန့်ရှင်းရေး">Tozalash</p>
+        <p class="word__note" data-uz="Xona va umumiy joylarni toza holatda saqlash." data-ja="部屋や共用場所を清潔な状態に保つことです。" data-en="Keeping rooms and shared areas clean." data-ne="कोठा र साझा स्थानलाई सफा अवस्थामा राख्नु हो।" data-my="အခန်းများနှင့် အများသုံးနေရာများကို သန့်ရှင်းစွာ ထိန်းသိမ်းထားခြင်းဖြစ်သည်။">Xona va umumiy joylarni toza holatda saqlash.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>客室清掃<rt>きゃくしつせいそう</rt></ruby></p>
+        <p class="word__meaning" data-uz="Mehmon xonasini tozalash" data-ja="客室清掃" data-en="Guest-room cleaning" data-ne="अतिथि कोठाको सरसफाइ" data-my="ဧည့်သည်အခန်း သန့်ရှင်းရေး">Mehmon xonasini tozalash</p>
+        <p class="word__note" data-uz="Xonani tozalash, jihozlash va keyingi mehmon uchun tayyorlash ishi." data-ja="部屋を掃除し、備品を整え、次のお客様のために準備する仕事です。" data-en="Cleaning, setting up, and preparing a room for the next guest." data-ne="कोठा सफा गर्ने, सामान मिलाउने र अर्को पाहुनाका लागि तयार गर्ने काम हो।" data-my="အခန်းကို သန့်ရှင်းရေးလုပ်ပြီး ပစ္စည်းများကို စနစ်တကျထားကာ နောက်ဧည့်သည်အတွက် ပြင်ဆင်သည့်လုပ်ငန်းဖြစ်သည်။">Xonani tozalash, jihozlash va keyingi mehmon uchun tayyorlash ishi.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>館内<rt>かんない</rt></ruby></p>
+        <p class="word__meaning" data-uz="Bino ichida" data-ja="館内" data-en="Inside the facility" data-ne="भवनभित्र" data-my="အဆောက်အအုံအတွင်း">Bino ichida</p>
+        <p class="word__note" data-uz="Mehmonxona binosining ichki qismi yoki ichidagi joylar." data-ja="ホテルや旅館の建物の中、または中にある場所を表します。" data-en="The interior of the hotel or inn and the places within it." data-ne="होटल वा र्योकान भवनको भित्री भाग वा त्यसभित्रका स्थानलाई जनाउँछ।" data-my="ဟိုတယ် သို့မဟုတ် တည်းခိုခန်းအတွင်းပိုင်းနှင့် အတွင်းရှိ နေရာများကို ဆိုလိုသည်။">Mehmonxona binosining ichki qismi yoki ichidagi joylar.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>非常口<rt>ひじょうぐち</rt></ruby></p>
+        <p class="word__meaning" data-uz="Favqulodda chiqish eshigi" data-ja="非常口" data-en="Emergency exit" data-ne="आपतकालीन निकास" data-my="အရေးပေါ်ထွက်ပေါက်">Favqulodda chiqish eshigi</p>
+        <p class="word__note" data-uz="Yong'in yoki boshqa xavf paytida chiqish uchun ishlatiladigan eshik." data-ja="火事などの緊急時に避難するための出口です。" data-en="An exit used to evacuate during a fire or other emergency." data-ne="आगो वा अन्य आपतकालमा बाहिर निस्कन प्रयोग हुने निकास हो।" data-my="မီးလောင်မှု သို့မဟုတ် အခြားအရေးပေါ်အခြေအနေတွင် ဘေးလွတ်ရာသို့ ထွက်ရန် အသုံးပြုသည့် ထွက်ပေါက်ဖြစ်သည်။">Yong'in yoki boshqa xavf paytida chiqish uchun ishlatiladigan eshik.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>忘れ物<rt>わすれもの</rt></ruby></p>
+        <p class="word__meaning" data-uz="Unutilgan buyum" data-ja="忘れ物" data-en="Lost property" data-ne="बिर्सिएको सामान" data-my="မေ့ကျန်ပစ္စည်း">Unutilgan buyum</p>
+        <p class="word__note" data-uz="Mehmon yoki xodim qoldirib ketgan buyum." data-ja="お客様やスタッフが置き忘れた物です。" data-en="An item left behind by a guest or staff member." data-ne="पाहुना वा कर्मचारीले छोडेर गएको सामान हो।" data-my="ဧည့်သည် သို့မဟုတ် ဝန်ထမ်းက မေ့ကျန်ခဲ့သော ပစ္စည်းဖြစ်သည်။">Mehmon yoki xodim qoldirib ketgan buyum.</p>
+      </article>
+      <article class="word">
+        <p class="word__term"><ruby>接客<rt>せっきゃく</rt></ruby></p>
+        <p class="word__meaning" data-uz="Mehmonlarga xizmat ko'rsatish" data-ja="接客" data-en="Customer service" data-ne="ग्राहक सेवा" data-my="ဧည့်သည်ဝန်ဆောင်မှု">Mehmonlarga xizmat ko'rsatish</p>
+        <p class="word__note" data-uz="Mehmonlar bilan muloyim, hurmatli va professional muomala qilish." data-ja="お客様に丁寧で気持ちのよい対応をすることです。" data-en="Treating guests politely, respectfully, and professionally." data-ne="पाहुनासँग विनम्र, सम्मानजनक र व्यावसायिक व्यवहार गर्नु हो।" data-my="ဧည့်သည်များနှင့် ယဉ်ကျေးစွာ၊ လေးစားစွာနှင့် ကျွမ်းကျင်စွာ ဆက်ဆံခြင်းဖြစ်သည်။">Mehmonlar bilan muloyim, hurmatli va professional muomala qilish.</p>
+      </article>
+    </section>
+    <nav class="pager" aria-label="ページ移動">
+      <button id="previous" type="button">前へ</button>
+      <span id="pageStatus" class="page-status"></span>
+      <button id="next" type="button">次へ</button>
+    </nav>
+  </main>
+
+  <script>
+    const labels = {
+      uz: {
+        eyebrow: 'Tokutei Ginou · Mehmonxona',
+        title: "Mehmonxona lug'ati",
+        lead: "Mehmonxona xizmatidagi asosiy yaponcha atamalarni takrorlang.",
+        list: 'Asosiy atamalar',
+        back: 'Ortga',
+        notebook: 'Xatolar daftarim'
+      },
+      ja: {
+        eyebrow: '特定技能 · 宿泊業',
+        title: '宿泊業分野の語彙',
+        lead: 'ホテルや旅館で使う大切な日本語を復習しましょう。',
+        list: '基本用語',
+        back: '戻る',
+        notebook: '間違いノート'
+      },
+      en: {
+        eyebrow: 'Specified Skilled Worker · Lodging & Hospitality',
+        title: 'Lodging vocabulary',
+        lead: 'Review essential Japanese terms used in hotels and ryokans.',
+        list: 'Key terms',
+        back: 'Back',
+        notebook: 'My mistakes'
+      },
+      ne: {
+        eyebrow: 'विशिष्ट दक्ष कामदार · होटल सेवा',
+        title: 'होटल शब्दावली',
+        lead: 'होटल र र्योकानमा प्रयोग हुने महत्त्वपूर्ण जापानी शब्दहरू दोहोर्याउनुहोस्।',
+        list: 'मुख्य शब्दहरू',
+        back: 'फर्कनुहोस्',
+        notebook: 'गल्तीहरूको नोटबुक'
+      },
+      my: {
+        eyebrow: 'သတ်မှတ်ကျွမ်းကျင်လုပ်သား · ဟိုတယ်ဝန်ဆောင်မှု',
+        title: 'ဟိုတယ်လုပ်ငန်း ဝေါဟာရ',
+        lead: 'ဟိုတယ်နှင့် ရိုခန်တွင် အသုံးပြုသည့် အရေးကြီးသော ဂျပန်ဝေါဟာရများကို ပြန်လည်လေ့လာပါ။',
+        list: 'အဓိက ဝေါဟာရများ',
+        back: 'နောက်သို့',
+        notebook: 'အမှားမှတ်စု'
+      }
+    };
+    window.__VOCAB_PAGE_LABELS__ = labels;
+
+    function applyVocabLocale(lang) {
+      const activeLang = labels[lang] ? lang : 'ja';
+      const current = labels[activeLang] || labels.ja;
+      document.documentElement.lang = activeLang;
+      document.title = current.title;
+      const elEyebrow = document.getElementById('eyebrow');
+      if (elEyebrow) elEyebrow.textContent = current.eyebrow;
+      const elTitle = document.getElementById('title');
+      if (elTitle) elTitle.textContent = current.title;
+      const elLead = document.getElementById('lead');
+      if (elLead) elLead.textContent = current.lead;
+      const elList = document.getElementById('listTitle');
+      if (elList) elList.textContent = current.list;
+      const elBack = document.getElementById('back');
+      if (elBack) elBack.textContent = current.back;
+      const elNotebook = document.getElementById('notebookLink');
+      if (elNotebook) elNotebook.textContent = current.notebook;
+      document.querySelectorAll('[data-uz]').forEach((item) => {
+        item.textContent = item.dataset[activeLang] ?? item.dataset.ja ?? item.dataset.en ?? '';
+      });
+      const langSelect = document.getElementById('language');
+      if (langSelect && langSelect.value !== activeLang) {
+        langSelect.value = activeLang;
+      }
+    }
+
+    const language = localStorage.getItem('language') || 'ja';
+    applyVocabLocale(language);
+
+    const langSelect = document.getElementById('language');
+    if (langSelect) {
+      langSelect.value = labels[language] ? language : 'ja';
+      langSelect.addEventListener('change', (e) => {
+        const nextLang = labels[e.target.value] ? e.target.value : 'ja';
+        localStorage.setItem('language', nextLang);
+        applyVocabLocale(nextLang);
+      });
+    }
+
+    window.ThemeManager?.updateUI();
+  </script>
+  <script src="./mistake-notebook.js"></script>
+  <script src="./sector-vocabulary-reviewed.js"></script>
+  <script src="./lodging-vocabulary-1000.js"></script>
+  <script src="./vocabulary-page.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

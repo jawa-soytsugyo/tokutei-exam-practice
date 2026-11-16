@@ -1,0 +1,42 @@
+{
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "特定機能練習問題",
+        "supportEmail": "saturan2501@gmail.com",
+        "authorizedRedirectUris": [
+          "https://tokutei-test-uz.web.app/__/auth/handler",
+          "https://tokutei-b82ef.firebaseapp.com/__/auth/handler"
+        ]
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "firestore-seed.json",
+      "firestore.rules",
+      "firestore.indexes.json",
+      "*.pdf",
+      "*.pptx",
+      "*.md",
+      "*.py",
+      "tools/**",
+      "y/**",
+      "test"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

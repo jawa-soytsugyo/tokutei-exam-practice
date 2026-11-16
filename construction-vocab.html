@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>建設分野の語彙</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#1F4E79" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vocabulary.css?v=20261116-1" />
+  <link rel="stylesheet" href="./theme.css?v=20261116-2" />
+  <script src="./theme-manager.js?v=20261116-1"></script>
+</head>
+<body data-sector="construction">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a id="back" class="back" href="./index.html">戻る</a>
+      <div class="controls">
+        <a id="notebookLink" class="back notebook-link" href="./mistakes.html">間違いノート</a>
+        <select id="language" aria-label="言語">
+          <option value="ja">日本語</option>
+          <option value="uz">O'zbek</option>
+          <option value="en">English</option>
+          <option value="ne">नेपाली</option>
+          <option value="my">မြန်မာဘာသာ</option>
+        </select>
+        <button id="theme" class="theme control" type="button" aria-label="夜間表示"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <span id="eyebrow" class="eyebrow">特定技能・建設</span>
+      <h1 id="title">建設分野の語彙</h1>
+      <p id="lead" class="lead">建設分野で使う日本語1000語を23項目で学びます。</p>
+    </section>
+
+    <section class="filters" aria-label="語彙の絞り込み">
+      <label class="filter" for="search">
+        <span id="searchLabel">検索</span>
+        <input id="search" type="search" autocomplete="off" />
+      </label>
+      <label class="filter" for="category">
+        <span id="categoryLabel">項目</span>
+        <select id="category"></select>
+      </label>
+    </section>
+
+    <div class="tools">
+      <div class="tools-left">
+        <h2 id="listTitle">建設用語</h2>
+        <span id="count" class="count" aria-live="polite"></span>
+      </div>
+      <div class="view-switch" role="tablist" aria-label="表示モード">
+        <button id="viewListBtn" class="view-btn is-active" type="button" aria-selected="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span id="viewListLabel">一覧</span>
+        </button>
+        <button id="viewFlashcardBtn" class="view-btn" type="button" aria-selected="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="viewFlashcardLabel">単語カード (Flashcard)</span>
+        </button>
+      </div>
+    </div>
+    <section id="flashcardArea" class="flashcard-area is-hidden" aria-label="単語カード">
+      <div class="fc-header">
+        <span id="fcCategory" class="fc-category-badge"></span>
+        <span id="fcCount" class="fc-counter">1 / 1000</span>
+      </div>
+      <div id="fcCard" class="fc-card" tabindex="0" role="button" aria-label="タップして意味を表示">
+        <div class="fc-card-inner">
+          <div class="fc-face fc-front">
+            <span class="fc-badge-hint" id="fcHintLabel">👆 タップで意味を表示</span>
+            <p id="fcTerm" class="fc-term"></p>
+            <p id="fcFrontReading" class="fc-reading-sub"></p>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="fc-back-category" id="fcBackCategory"></span>
+            <p id="fcMeaning" class="fc-meaning"></p>
+            <p id="fcReading" class="fc-reading"></p>
+            <p id="fcNote" class="fc-note"></p>
+          </div>
+        </div>
+      </div>
+      <div class="fc-controls">
+        <button id="fcPrev" class="fc-btn fc-nav" type="button">⬅️ 前へ</button>
+        <button id="fcFlip" class="fc-btn fc-flip" type="button">🔄 めくる</button>
+        <button id="fcNext" class="fc-btn fc-nav" type="button">次へ ➡️</button>
+      </div>
+      <div class="fc-actions">
+        <button id="fcMistake" class="fc-action-btn fc-mistake" type="button">❌ 覚えていない</button>
+        <button id="fcKnown" class="fc-action-btn fc-known" type="button">✅ 覚えた！</button>
+      </div>
+    </section>
+    <section id="vocabulary" class="vocabulary" aria-labelledby="listTitle"></section>
+    <nav class="pager" aria-label="ページ移動">
+      <button id="previous" type="button">前へ</button>
+      <span id="pageStatus" class="page-status"></span>
+      <button id="next" type="button">次へ</button>
+    </nav>
+  </main>
+
+  <script src="./firebase-bootstrap.js?v=20261116-1"></script>
+  <script src="./construction-vocab-data.js?v=20260730-7"></script>
+  <script src="./construction-i18n.js?v=20260730-7"></script>
+  <script src="./japanese-furigana.js?v=20260730-7"></script>
+  <script src="./mistake-notebook.js"></script>
+  <script src="./construction-vocab.js?v=20261116-1"></script>
+  <script src="./pwa-helper.js?v=20261116-2" defer></script>
+  <script src="./back-nav.js?v=20261116-1" defer></script>
+</body>
+</html>

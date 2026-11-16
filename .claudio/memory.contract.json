@@ -1,0 +1,34 @@
+{
+  "version": "1",
+  "workspaceId": "e0924e3d96282ccd",
+  "workspaceName": "特定機能試験練習",
+  "enabled": true,
+  "updatedAt": "2026-07-28T02:48:18.355Z",
+  "detectedStack": {
+    "languages": [],
+    "frameworks": [],
+    "uiLibraries": [],
+    "orm": [],
+    "authLibraries": [],
+    "validationLibraries": [],
+    "paymentLibraries": [],
+    "testTools": [],
+    "scripts": {},
+    "importantDirs": [],
+    "sensitiveFiles": []
+  },
+  "sections": {
+    "stack": [],
+    "packageManager": [],
+    "architectureRules": [],
+    "codingConventions": [],
+    "sensitiveFiles": [],
+    "forbiddenActions": [],
+    "allowedCommands": [],
+    "businessRules": [],
+    "integrationRules": [],
+    "testingExpectations": [],
+    "agentInstructions": [],
+    "openQuestions": []
+  }
+}
